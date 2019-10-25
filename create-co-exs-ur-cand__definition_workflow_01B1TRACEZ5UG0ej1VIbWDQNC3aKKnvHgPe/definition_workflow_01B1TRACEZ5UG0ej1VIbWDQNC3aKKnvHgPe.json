@@ -1,0 +1,675 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01B1TRACEZ5UG0ej1VIbWDQNC3aKKnvHgPe",
+    "name": "Create CO EXS-UR-CAND",
+    "title": "Create CO EXS-UR-CAND",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "create-exs-ur-cand.sh",
+          "scope": "input",
+          "name": "Script Name",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01B1TY7X9G5Q27eurtMYWpmGAtrYXYb0RyE",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "CC_RUN_ID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01B1TU8ERBKIX2U5wVvLjCYpJuljIEinWSM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "NODE_ID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01B1TVUW9Q46S2mm3NBFyNtkjSdvKbXJcJG",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "/cpsg-galaxy/co-scripts/master",
+          "scope": "input",
+          "name": "Script Path (URL)",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01B1TXMBP30CX3yqzojpkQLlsUD2ijEJeBH",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "depends_on": "CC",
+      "display_name": "Create CO EXS-UR-CAND",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01B1TYIQ0O5MH1o3kvNctV6xSbZVZj4W0t4",
+        "name": "Get Workload Manager Context",
+        "title": "Get WM Context",
+        "type": "ccs.get_cloud_context",
+        "base_type": "activity",
+        "properties": {
+          "action_id": "99",
+          "action_timeout": 180,
+          "cc_configuration": {
+            "execute_action": "on_vm",
+            "reboot_vm": false,
+            "resource_mappings": [
+              {
+                "applied_to": {
+                  "app_ids": [
+                    {
+                      "id": "29",
+                      "name": "CentOS"
+                    },
+                    {
+                      "id": "513",
+                      "name": "Content Factory"
+                    },
+                    {
+                      "id": "515",
+                      "name": "GLXY-CentOS-7"
+                    },
+                    {
+                      "id": "777",
+                      "name": "GLXY-Ubuntu-16.04"
+                    },
+                    {
+                      "id": "468",
+                      "name": "OpenCart"
+                    },
+                    {
+                      "id": "33",
+                      "name": "RedHat"
+                    },
+                    {
+                      "id": "35",
+                      "name": "Ubuntu"
+                    },
+                    {
+                      "id": "39",
+                      "name": "Windows"
+                    }
+                  ],
+                  "cloud_account": [
+                    {
+                      "id": "101",
+                      "name": "AWS_cpsg-galaxy-admin"
+                    },
+                    {
+                      "id": "104",
+                      "name": "AZURE_cpsg-galaxy-ccs"
+                    },
+                    {
+                      "id": "102",
+                      "name": "GCP_cpsg-galaxy-admin"
+                    },
+                    {
+                      "id": "106",
+                      "name": "VMW_administrator"
+                    }
+                  ],
+                  "cloud_region": [
+                    {
+                      "id": "2",
+                      "name": "EU (Stockholm)"
+                    },
+                    {
+                      "id": "3",
+                      "name": "EU (Ireland)"
+                    },
+                    {
+                      "id": "4",
+                      "name": "EU (London)"
+                    },
+                    {
+                      "id": "5",
+                      "name": "Asia Pacific (Mumbai)"
+                    },
+                    {
+                      "id": "6",
+                      "name": "EU (Paris)"
+                    },
+                    {
+                      "id": "7",
+                      "name": "Asia Pacific (Seoul)"
+                    },
+                    {
+                      "id": "8",
+                      "name": "Asia Pacific (Tokyo)"
+                    },
+                    {
+                      "id": "9",
+                      "name": "South America (Sao Paulo)"
+                    },
+                    {
+                      "id": "10",
+                      "name": "Canada (Central)"
+                    },
+                    {
+                      "id": "11",
+                      "name": "Asia Pacific (Singapore)"
+                    },
+                    {
+                      "id": "12",
+                      "name": "Asia Pacific (Sydney)"
+                    },
+                    {
+                      "id": "13",
+                      "name": "EU (Frankfurt)"
+                    },
+                    {
+                      "id": "14",
+                      "name": "US East (N. Virginia)"
+                    },
+                    {
+                      "id": "15",
+                      "name": "US East (Ohio)"
+                    },
+                    {
+                      "id": "16",
+                      "name": "US West (N. California)"
+                    },
+                    {
+                      "id": "17",
+                      "name": "US West (Oregon)"
+                    },
+                    {
+                      "id": "134",
+                      "name": "US East (Virginia)"
+                    },
+                    {
+                      "id": "135",
+                      "name": "Brazil South (Sao Paulo State)"
+                    },
+                    {
+                      "id": "144",
+                      "name": "US East 2 (Virginia)"
+                    },
+                    {
+                      "id": "145",
+                      "name": "US Central (Iowa)"
+                    },
+                    {
+                      "id": "146",
+                      "name": "US North Central (Illinois)"
+                    },
+                    {
+                      "id": "147",
+                      "name": "US South Central (Texas)"
+                    },
+                    {
+                      "id": "148",
+                      "name": "US West Central (Wyoming)"
+                    },
+                    {
+                      "id": "149",
+                      "name": "US West (California)"
+                    },
+                    {
+                      "id": "150",
+                      "name": "US West 2 (Washington)"
+                    },
+                    {
+                      "id": "151",
+                      "name": "Canada East (Quebec City)"
+                    },
+                    {
+                      "id": "152",
+                      "name": "Canada Central (Toronto)"
+                    },
+                    {
+                      "id": "153",
+                      "name": "Europe North (Ireland)"
+                    },
+                    {
+                      "id": "154",
+                      "name": "Europe West (Netherlands)"
+                    },
+                    {
+                      "id": "155",
+                      "name": "UK West (Cardiff)"
+                    },
+                    {
+                      "id": "156",
+                      "name": "UK South (London)"
+                    },
+                    {
+                      "id": "159",
+                      "name": "Southeast Asia (Singapore)"
+                    },
+                    {
+                      "id": "161",
+                      "name": "Australia East (New South Wales)"
+                    },
+                    {
+                      "id": "162",
+                      "name": "Australia Southeast (Victoria)"
+                    },
+                    {
+                      "id": "163",
+                      "name": "Japan East (Saitama)"
+                    },
+                    {
+                      "id": "164",
+                      "name": "Japan West (Osaka)"
+                    },
+                    {
+                      "id": "165",
+                      "name": "Korea Central (Seoul)"
+                    },
+                    {
+                      "id": "166",
+                      "name": "Korea South (Busan)"
+                    },
+                    {
+                      "id": "171",
+                      "name": "Australia Central (Canberra)"
+                    },
+                    {
+                      "id": "172",
+                      "name": "Australia Central 2 (Canberra)"
+                    },
+                    {
+                      "id": "176",
+                      "name": "France Central (Paris)"
+                    },
+                    {
+                      "id": "177",
+                      "name": "France South (Marseille)"
+                    },
+                    {
+                      "id": "21",
+                      "name": "Eastern Asia-Pacific (Taiwan)"
+                    },
+                    {
+                      "id": "22",
+                      "name": "Eastern Asia-Pacific (Hong Kong)"
+                    },
+                    {
+                      "id": "23",
+                      "name": "Northeastern Asia-Pacific (Tokyo)"
+                    },
+                    {
+                      "id": "24",
+                      "name": "Southern Asia-Pacific (Mumbai)"
+                    },
+                    {
+                      "id": "25",
+                      "name": "South Eastern Asia-Pacific (Singapore)"
+                    },
+                    {
+                      "id": "26",
+                      "name": "South Eastern Australia (Sydney)"
+                    },
+                    {
+                      "id": "27",
+                      "name": "Northern Europe (Finland)"
+                    },
+                    {
+                      "id": "28",
+                      "name": "Western Europe (Belgium)"
+                    },
+                    {
+                      "id": "29",
+                      "name": "European West (London)"
+                    },
+                    {
+                      "id": "30",
+                      "name": "European West (Frankfurt)"
+                    },
+                    {
+                      "id": "31",
+                      "name": "European West (Netherlands)"
+                    },
+                    {
+                      "id": "32",
+                      "name": "Northern America (Montréal)"
+                    },
+                    {
+                      "id": "33",
+                      "name": "Southern America (São Paulo)"
+                    },
+                    {
+                      "id": "34",
+                      "name": "Central US (Iowa)"
+                    },
+                    {
+                      "id": "35",
+                      "name": "Western US (Los Angeles)"
+                    },
+                    {
+                      "id": "36",
+                      "name": "Western US (Oregon)"
+                    },
+                    {
+                      "id": "37",
+                      "name": "Eastern US (Northern Virginia)"
+                    },
+                    {
+                      "id": "38",
+                      "name": "Eastern US (South Carolina)"
+                    },
+                    {
+                      "id": "272",
+                      "name": "default"
+                    }
+                  ],
+                  "service": [
+                    {
+                      "id": "14",
+                      "name": "geronimo3"
+                    },
+                    {
+                      "id": "6",
+                      "name": "varnish"
+                    },
+                    {
+                      "id": "46",
+                      "name": "Ubuntu"
+                    },
+                    {
+                      "id": "47",
+                      "name": "Windows"
+                    },
+                    {
+                      "id": "33",
+                      "name": "rabbitmq"
+                    },
+                    {
+                      "id": "43",
+                      "name": "CentOS"
+                    },
+                    {
+                      "id": "2",
+                      "name": "hadoop"
+                    },
+                    {
+                      "id": "3",
+                      "name": "jmeter"
+                    },
+                    {
+                      "id": "5",
+                      "name": "rubyonrails"
+                    },
+                    {
+                      "id": "9",
+                      "name": "haproxy"
+                    },
+                    {
+                      "id": "11",
+                      "name": "memcached"
+                    },
+                    {
+                      "id": "12",
+                      "name": "nginx"
+                    },
+                    {
+                      "id": "55",
+                      "name": "docker"
+                    },
+                    {
+                      "id": "17",
+                      "name": "gluster2"
+                    },
+                    {
+                      "id": "30",
+                      "name": "sqlserver2k8r2"
+                    },
+                    {
+                      "id": "54",
+                      "name": "awselb"
+                    },
+                    {
+                      "id": "16",
+                      "name": "apache2"
+                    },
+                    {
+                      "id": "7",
+                      "name": "tomcat6"
+                    },
+                    {
+                      "id": "22",
+                      "name": "mysql"
+                    },
+                    {
+                      "id": "62",
+                      "name": "puppet"
+                    },
+                    {
+                      "id": "51",
+                      "name": "sqlserver2k12"
+                    },
+                    {
+                      "id": "13",
+                      "name": "tomcat7"
+                    },
+                    {
+                      "id": "10",
+                      "name": "mongodb"
+                    },
+                    {
+                      "id": "15",
+                      "name": "activemq"
+                    },
+                    {
+                      "id": "50",
+                      "name": "rdsmysql"
+                    },
+                    {
+                      "id": "63",
+                      "name": "chef"
+                    },
+                    {
+                      "id": "45",
+                      "name": "SLES"
+                    },
+                    {
+                      "id": "67",
+                      "name": "mysqlcontainer"
+                    },
+                    {
+                      "id": "44",
+                      "name": "RHEL"
+                    },
+                    {
+                      "id": "64",
+                      "name": "nginxcontainer"
+                    },
+                    {
+                      "id": "66",
+                      "name": "mongocontainer"
+                    },
+                    {
+                      "id": "65",
+                      "name": "apache2container"
+                    },
+                    {
+                      "id": "8",
+                      "name": "cassandra"
+                    },
+                    {
+                      "id": "34",
+                      "name": "jetty"
+                    },
+                    {
+                      "id": "31",
+                      "name": "iis"
+                    }
+                  ]
+                },
+                "resource_type": "cc_deploy_vm",
+                "resource_type_meta_info": {
+                  "cc_deploy_vm": {
+                    "app_ids": "All",
+                    "cloud_account": "All",
+                    "cloud_region": "All",
+                    "service": "All"
+                  }
+                }
+              }
+            ],
+            "sync_vm": false,
+            "wf_availability_type": "ondemand"
+          },
+          "cc_run_id": "$workflow.definition_workflow_01B1TRACEZ5UG0ej1VIbWDQNC3aKKnvHgPe.input.variable_workflow_01B1TU8ERBKIX2U5wVvLjCYpJuljIEinWSM$",
+          "continue_on_failure": false,
+          "display_name": "Get WM Context",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B1U8GXH08Q90eiPbdLLl63hwoIBkLFXlz",
+        "name": "Install Stress",
+        "title": "Install Stress",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Install Stress",
+          "input": {
+            "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01B1TRACEZ5UG0ej1VIbWDQNC3aKKnvHgPe.input.variable_workflow_01B1TVUW9Q46S2mm3NBFyNtkjSdvKbXJcJG$",
+            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01B1TYIQ0O5MH1o3kvNctV6xSbZVZj4W0t4.output.action_type$",
+            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01B1TYIQ0O5MH1o3kvNctV6xSbZVZj4W0t4.output.response_body$",
+            "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
+            "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
+            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "sudo yum install stress -y"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q",
+            "target_type": "ccsuite.integration_endpoint"
+          },
+          "workflow_id": "definition_workflow_01gD85jbeDkSP5TO2AYeuvkAJkbgBWyhY"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B1U19KD73FY4sMFzt8HAH56U2BwBpSTpg",
+        "name": "Curl Required Script",
+        "title": "Curl Required Script",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Curl Required Script",
+          "input": {
+            "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01B1TRACEZ5UG0ej1VIbWDQNC3aKKnvHgPe.input.variable_workflow_01B1TVUW9Q46S2mm3NBFyNtkjSdvKbXJcJG$",
+            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01B1TYIQ0O5MH1o3kvNctV6xSbZVZj4W0t4.output.action_type$",
+            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01B1TYIQ0O5MH1o3kvNctV6xSbZVZj4W0t4.output.response_body$",
+            "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
+            "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
+            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "curl -O /var/tmp/ $global.variable_01B1LCSFSACD946QarHlkr7b4ysqgQSbvWO.global.variable_01B1LCSFSACD946QarHlkr7b4ysqgQSbvWO$$workflow.definition_workflow_01B1TRACEZ5UG0ej1VIbWDQNC3aKKnvHgPe.input.variable_workflow_01B1TXMBP30CX3yqzojpkQLlsUD2ijEJeBH$$workflow.definition_workflow_01B1TRACEZ5UG0ej1VIbWDQNC3aKKnvHgPe.input.variable_workflow_01B1TY7X9G5Q27eurtMYWpmGAtrYXYb0RyE$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q",
+            "target_type": "ccsuite.integration_endpoint"
+          },
+          "workflow_id": "definition_workflow_01gD85jbeDkSP5TO2AYeuvkAJkbgBWyhY"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01B1U399LKK8A1U0mRyXHVDxuy5Ye9MtHWg",
+        "name": "Run Script",
+        "title": "Run Script",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Run Script",
+          "input": {
+            "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01B1TRACEZ5UG0ej1VIbWDQNC3aKKnvHgPe.input.variable_workflow_01B1TVUW9Q46S2mm3NBFyNtkjSdvKbXJcJG$",
+            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01B1TYIQ0O5MH1o3kvNctV6xSbZVZj4W0t4.output.action_type$",
+            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01B1TYIQ0O5MH1o3kvNctV6xSbZVZj4W0t4.output.response_body$",
+            "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
+            "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
+            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "curl -O /var/tmp/$workflow.definition_workflow_01B1TRACEZ5UG0ej1VIbWDQNC3aKKnvHgPe.input.variable_workflow_01B1TY7X9G5Q27eurtMYWpmGAtrYXYb0RyE$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q",
+            "target_type": "ccsuite.integration_endpoint"
+          },
+          "workflow_id": "definition_workflow_01gD85jbeDkSP5TO2AYeuvkAJkbgBWyhY"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "variables": {
+    "variable_01B1LCSFSACD946QarHlkr7b4ysqgQSbvWO": {
+      "unique_name": "variable_01B1LCSFSACD946QarHlkr7b4ysqgQSbvWO",
+      "properties": {
+        "value": "https://raw.githubusercontent.com/cpsg-galaxy",
+        "scope": "global",
+        "name": "CPSG-Galaxy GitHub - Raw",
+        "type": "datatype.string",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01gD85jbeDkSP5TO2AYeuvkAJkbgBWyhY"
+  ]
+}
