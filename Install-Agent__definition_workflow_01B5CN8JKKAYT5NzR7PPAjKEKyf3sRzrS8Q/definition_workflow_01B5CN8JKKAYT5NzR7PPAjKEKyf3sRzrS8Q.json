@@ -523,12 +523,12 @@
                       {
                         "unique_name": "definition_activity_01BFB81IOCHGP27EMd4iIzR6UA4PjSzl6JN",
                         "name": "Parallel Block",
-                        "title": "Install Agents",
+                        "title": "Download Required Files",
                         "type": "logic.parallel",
                         "base_type": "activity",
                         "properties": {
                           "continue_on_failure": false,
-                          "display_name": "Install Agents",
+                          "display_name": "Download Required Files",
                           "skip_execution": false
                         },
                         "object_type": "definition_activity",
@@ -540,7 +540,7 @@
                             "type": "logic.parallel_block",
                             "base_type": "activity",
                             "properties": {
-                              "continue_on_failure": true,
+                              "continue_on_failure": false,
                               "display_name": "AppD",
                               "skip_execution": false
                             },
@@ -619,36 +619,6 @@
                                   "workflow_id": "definition_workflow_01gD85jbeDkSP5TO2AYeuvkAJkbgBWyhY"
                                 },
                                 "object_type": "definition_activity"
-                              },
-                              {
-                                "unique_name": "definition_activity_01BGM4M6IYAR93z2IKpLfUiiWOsgUIAoZEI",
-                                "name": "Install AppD Agent",
-                                "title": "Install AppD Agent",
-                                "type": "workflow.atomic_workflow",
-                                "base_type": "subworkflow",
-                                "properties": {
-                                  "continue_on_failure": false,
-                                  "display_name": "Install AppD Agent",
-                                  "input": {
-                                    "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01B5CN8JKKAYT5NzR7PPAjKEKyf3sRzrS8Q.input.variable_workflow_01BEIHX7ZQ4181ZaNBBFIAvyY6MFpCBs7Fu$",
-                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01B5D3KI1NBJG44K3M40aGR7h3k4XWcnvaJ.output.action_type$",
-                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01B5D3KI1NBJG44K3M40aGR7h3k4XWcnvaJ.output.response_body$",
-                                    "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
-                                    "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "./$workflow.definition_workflow_01B5CN8JKKAYT5NzR7PPAjKEKyf3sRzrS8Q.static.variable_workflow_01BEK19U63GBO0zHZRb2xqPl6fxZ03WyHkQ$ $activity.definition_activity_01B5D4YVHH1HB6TeRCuaJZeBzfeOJAVXYpL.output.jsonpath_queries.parent_jobname$ $workflow.definition_workflow_01B5CN8JKKAYT5NzR7PPAjKEKyf3sRzrS8Q.static.variable_workflow_01BGM80L4LNX85YDWvqLWEU1dux5GgrI4WI$ $activity.definition_activity_01B5D4YVHH1HB6TeRCuaJZeBzfeOJAVXYpL.output.jsonpath_queries.parent_jobname$ $activity.definition_activity_01B5D4YVHH1HB6TeRCuaJZeBzfeOJAVXYpL.output.jsonpath_queries.tier_jobname$ $activity.definition_activity_01B5D4YVHH1HB6TeRCuaJZeBzfeOJAVXYpL.output.jsonpath_queries.tier_jobid$ $activity.definition_activity_01B5D4YVHH1HB6TeRCuaJZeBzfeOJAVXYpL.output.jsonpath_queries.node_name$"
-                                  },
-                                  "runtime_user": {
-                                    "target_default": true
-                                  },
-                                  "skip_execution": false,
-                                  "target": {
-                                    "execute_on_this_target": true,
-                                    "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q",
-                                    "target_type": "ccsuite.integration_endpoint"
-                                  },
-                                  "workflow_id": "definition_workflow_01gD85jbeDkSP5TO2AYeuvkAJkbgBWyhY"
-                                },
-                                "object_type": "definition_activity"
                               }
                             ]
                           },
@@ -659,7 +629,7 @@
                             "type": "logic.parallel_block",
                             "base_type": "activity",
                             "properties": {
-                              "continue_on_failure": true,
+                              "continue_on_failure": false,
                               "display_name": "Tetration",
                               "skip_execution": false
                             },
@@ -708,7 +678,82 @@
                                   "sleep_interval": 15
                                 },
                                 "object_type": "definition_activity"
-                              },
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "unique_name": "definition_activity_01BGPF18S6P5I5X92lfzEQ2Ocq6FHH6c5Yn",
+                        "name": "Parallel Block",
+                        "title": "Install Agents",
+                        "type": "logic.parallel",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Install Agents",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "blocks": [
+                          {
+                            "unique_name": "definition_activity_01BGPF1GDNDDN0i9Pc3RSXhhBXxx5exLBs9",
+                            "name": "Parallel Branch",
+                            "title": "AppD",
+                            "type": "logic.parallel_block",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "AppD",
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity",
+                            "actions": [
+                              {
+                                "unique_name": "definition_activity_01BGM4M6IYAR93z2IKpLfUiiWOsgUIAoZEI",
+                                "name": "Install AppD Agent",
+                                "title": "Install AppD Agent",
+                                "type": "workflow.atomic_workflow",
+                                "base_type": "subworkflow",
+                                "properties": {
+                                  "continue_on_failure": false,
+                                  "display_name": "Install AppD Agent",
+                                  "input": {
+                                    "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01B5CN8JKKAYT5NzR7PPAjKEKyf3sRzrS8Q.input.variable_workflow_01BEIHX7ZQ4181ZaNBBFIAvyY6MFpCBs7Fu$",
+                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01B5D3KI1NBJG44K3M40aGR7h3k4XWcnvaJ.output.action_type$",
+                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01B5D3KI1NBJG44K3M40aGR7h3k4XWcnvaJ.output.response_body$",
+                                    "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
+                                    "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
+                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "./$workflow.definition_workflow_01B5CN8JKKAYT5NzR7PPAjKEKyf3sRzrS8Q.static.variable_workflow_01BEK19U63GBO0zHZRb2xqPl6fxZ03WyHkQ$ $activity.definition_activity_01B5D4YVHH1HB6TeRCuaJZeBzfeOJAVXYpL.output.jsonpath_queries.parent_jobname$ $workflow.definition_workflow_01B5CN8JKKAYT5NzR7PPAjKEKyf3sRzrS8Q.static.variable_workflow_01BGM80L4LNX85YDWvqLWEU1dux5GgrI4WI$ $activity.definition_activity_01B5D4YVHH1HB6TeRCuaJZeBzfeOJAVXYpL.output.jsonpath_queries.parent_jobname$ $activity.definition_activity_01B5D4YVHH1HB6TeRCuaJZeBzfeOJAVXYpL.output.jsonpath_queries.tier_jobname$ $activity.definition_activity_01B5D4YVHH1HB6TeRCuaJZeBzfeOJAVXYpL.output.jsonpath_queries.tier_jobid$ $activity.definition_activity_01B5D4YVHH1HB6TeRCuaJZeBzfeOJAVXYpL.output.jsonpath_queries.node_name$"
+                                  },
+                                  "runtime_user": {
+                                    "target_default": true
+                                  },
+                                  "skip_execution": false,
+                                  "target": {
+                                    "execute_on_this_target": true,
+                                    "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q",
+                                    "target_type": "ccsuite.integration_endpoint"
+                                  },
+                                  "workflow_id": "definition_workflow_01gD85jbeDkSP5TO2AYeuvkAJkbgBWyhY"
+                                },
+                                "object_type": "definition_activity"
+                              }
+                            ]
+                          },
+                          {
+                            "unique_name": "definition_activity_01BGPF1JP4ZC05qL10A3rFyqxJrr5ZtRKYg",
+                            "name": "Parallel Branch",
+                            "title": "Tetration",
+                            "type": "logic.parallel_block",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "Tetration",
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity",
+                            "actions": [
                               {
                                 "unique_name": "definition_activity_01BGL8YSMXETM15ROjgBvnnaOpo04TUmQ9d",
                                 "name": "Install Tetration Agent",
