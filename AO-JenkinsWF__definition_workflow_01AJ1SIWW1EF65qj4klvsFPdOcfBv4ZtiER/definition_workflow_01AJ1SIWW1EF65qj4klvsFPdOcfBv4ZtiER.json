@@ -1,0 +1,310 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01AJ1SIWW1EF65qj4klvsFPdOcfBv4ZtiER",
+    "name": "CI_CD",
+    "title": "CI_CD",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "properties",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01B1WGEZGXZBS4Vb5DgJae821uUwNg3TvDk",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "Demonstrating CI/CD via AO. This Workflow will be executed from a Jenkins call. The workflow will pull a tempalte from Github and fill in the template from previous steps in order to deploy the solution in Kubernetes. Additionally, this workflow executes Helm to install MongoDB and provides back the IP address of the deployed pod.",
+      "display_name": "CI_CD",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01B1WF61RZL0R3vwIQfR6CTuVazATOSQMkL",
+        "name": "Read Table from JSON",
+        "title": "Read Table from JSON",
+        "type": "corejava.read_table_from_json",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Read Table from JSON",
+          "input_json": "$workflow.definition_workflow_01AJ1SIWW1EF65qj4klvsFPdOcfBv4ZtiER.input.variable_workflow_01B1WGEZGXZBS4Vb5DgJae821uUwNg3TvDk$",
+          "jsonpath_query": "$.version",
+          "persist_output": false,
+          "populate_columns": false,
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "version",
+              "column_type": "string"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BH994BQEBC30c4SsmK7JwMBefcpiHSFjA",
+        "name": "Execute Linux/Unix SSH Script",
+        "title": "Check File Exists",
+        "type": "terminal.ssh_script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Check File Exists",
+          "multiple_arguments": true,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "script": "FILE=/root/kubernetes.yaml\nif [ -f \"$FILE\" ]; then\n    echo \"$FILE exist\"\nelse \n    echo \"$FILE does not exist\"\nfi",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BH1LFDP5YSK2v6CSRvtIUvzHYyP6q4IqS"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BH8UND1RSOO3Nl4GLDBnAaLa64tjptDlA",
+        "name": "Condition Block",
+        "title": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Condition Block",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01BH8UNL0E3C46RrIofLWVJb5LML9joYarF",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01BH994BQEBC30c4SsmK7JwMBefcpiHSFjA.output.response_body$",
+                "operator": "eqi",
+                "right_operand": "/root/kubernetes.yaml exist"
+              },
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01BH9FT3QNKN23JipOiZUjUmXMUDc0v8lxd",
+                "name": "Execute Linux/Unix SSH Script",
+                "title": "Remove deployment",
+                "type": "terminal.ssh_script",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Remove deployment",
+                  "multiple_arguments": false,
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "script": "rm /root/kubernetes.yaml\nhelm del --purge cld-mongodb\nkubectl delete deployment auth-svc-deployment\nexit 0\n",
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01BH1LFDP5YSK2v6CSRvtIUvzHYyP6q4IqS"
+                  },
+                  "work_dir": "/root"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01BH61XOVP0HF4O3zJq0ZoZUXfdD2wKTZgc",
+        "name": "Execute Linux/Unix SSH Command",
+        "title": "Install MongoDB",
+        "type": "terminal.ssh_command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "command": "helm install  stable/mongodb --name=cld-mongodb --set mongodbRootPassword=Cisco123,mongodbUsername=admin,mongodbPassword=Cisco123,mongodbDatabase=test",
+          "command_timeout": 60,
+          "continue_on_failure": false,
+          "display_name": "Install MongoDB",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BH1LFDP5YSK2v6CSRvtIUvzHYyP6q4IqS"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BH7QLGHNVQG72lFdrGhZc7fgPwqtfoEAy",
+        "name": "Execute Linux/Unix SSH Command",
+        "title": "Get MongoDB IP",
+        "type": "terminal.ssh_command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "command": "kubectl get svc/cld-mongodb -o jsonpath=\"{.spec.clusterIP}\"",
+          "command_timeout": 60,
+          "continue_on_failure": false,
+          "display_name": "Get MongoDB IP",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BH1LFDP5YSK2v6CSRvtIUvzHYyP6q4IqS"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BD5RCBE5G2G2aQKyZQNco9BEm3vZWW4ga",
+        "name": "Fill Template from Github",
+        "title": "Fill Template from Github",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Fill Template from Github",
+          "input": {
+            "variable_workflow_01BD283B9GNXK3fvhH1Sg4n3hhMMWklcxPj": "/cpsg-galaxy/auth-svc/master/deploy/kubernetes.tmpl",
+            "variable_workflow_01BD28B03ZDRL2ePtStmcO6ssgLpNNQVqns": "$activity.definition_activity_01BH7QLGHNVQG72lFdrGhZc7fgPwqtfoEAy.output.response_body$",
+            "variable_workflow_01BD28Q352IH67jA35vWs5XwQt4wfK4rf7e": "admin",
+            "variable_workflow_01BD28XT0O6PO4j89SRJUR9GgQklT00QvvQ": "$activity.definition_activity_01B1WF61RZL0R3vwIQfR6CTuVazATOSQMkL.output.read_table_from_json[0].version$",
+            "variable_workflow_01BD2AEDDA9AY3ujwcOay9yynYZZDUmi0z5": "Cisco123"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01BD1QYW2X2EK4KRS7zFhabpCCiTvG61Dma",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01BD1LDMZYZ2N6TgnzSRUaFvsUABuUMOsha"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BH1LPUP650N3ft3YPvS5xLd3SQQPJXr9s",
+        "name": "Write File",
+        "title": "Write YAML File",
+        "type": "terminal.write_file",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "content": "$activity.definition_activity_01BD5RCBE5G2G2aQKyZQNco9BEm3vZWW4ga.output.variable_workflow_01BD5QE9P8EML3ljKrIMCEjIgxb2qznBPo5$",
+          "continue_on_failure": false,
+          "display_name": "Write YAML File",
+          "encoding": "utf-8",
+          "file_name": "/root/kubernetes.yaml",
+          "options": "overwrite",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BH1LFDP5YSK2v6CSRvtIUvzHYyP6q4IqS"
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01BD1QYW2X2EK4KRS7zFhabpCCiTvG61Dma": {
+      "unique_name": "definition_target_01BD1QYW2X2EK4KRS7zFhabpCCiTvG61Dma",
+      "name": "raw.githubusercontent.com",
+      "title": "raw.githubusercontent.com",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "raw.githubusercontent.com",
+        "host": "raw.githubusercontent.com",
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01BH1LFDP5YSK2v6CSRvtIUvzHYyP6q4IqS": {
+      "unique_name": "definition_target_01BH1LFDP5YSK2v6CSRvtIUvzHYyP6q4IqS",
+      "name": "cloudbox",
+      "title": "cloudbox",
+      "type": "terminal.unix_linux_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "bash_shell": "/bin/bash",
+        "default_runtime_user_id": "definition_runtime_user_01BH16597O8PB72JNzAVlj801ZRl00sa06Y",
+        "display_name": "cloudbox",
+        "host": "35.243.165.112",
+        "port": 222
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01BH16597O8PB72JNzAVlj801ZRl00sa06Y": {
+      "unique_name": "definition_runtime_user_01BH16597O8PB72JNzAVlj801ZRl00sa06Y",
+      "name": "cloudbox",
+      "title": "cloudbox",
+      "type": "runtime_user.terminal_key_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "cloudbox",
+        "key": "*****",
+        "user": "*****"
+      }
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01BD1LDMZYZ2N6TgnzSRUaFvsUABuUMOsha"
+  ]
+}
