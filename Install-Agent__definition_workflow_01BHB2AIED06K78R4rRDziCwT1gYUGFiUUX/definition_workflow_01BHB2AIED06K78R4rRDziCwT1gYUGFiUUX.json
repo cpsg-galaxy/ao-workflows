@@ -9,6 +9,30 @@
       {
         "schema_id": "datatype.string",
         "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "NODE_ID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "appd-php-agent-4.5.14.3101.tar.bz2",
+          "scope": "static",
+          "name": "appd_agent_filename",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BHB2B1CQZD62yfqBkCtl8OKBVo1f0MIu2",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
           "value": "tetration-sensor-3.1.1.70-1.rpm",
           "scope": "static",
           "name": "tetration_sensor_filename",
@@ -45,18 +69,6 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "GLXY-Customer-1@d3dd6e42-99be-4f2c-b4cd-a24ee7d5a1fd",
-          "scope": "static",
-          "name": "appd-controller_api",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BHB2B1CR4KS7D2ZFvqAcvdNqtOHVmOgQx",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
           "value": "",
           "scope": "input",
           "name": "CC_RUN_ID",
@@ -67,27 +79,15 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
+        "schema_id": "datatype.secure_string",
         "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "NODE_ID",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "appd-php-agent-4.5.14.3101.tar.bz2",
+          "value": "*****",
           "scope": "static",
-          "name": "appd_agent_filename",
-          "type": "datatype.string",
+          "name": "appd-controller_api",
+          "type": "datatype.secure_string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01BHB2B1CQZD62yfqBkCtl8OKBVo1f0MIu2",
+        "unique_name": "variable_workflow_01BJRP5T7FLT20OYoXsnob2v4tRf7RwkVN6",
         "object_type": "variable_workflow"
       }
     ],
@@ -110,13 +110,13 @@
     "object_type": "definition_workflow",
     "actions": [
       {
-        "unique_name": "definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP",
+        "unique_name": "definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H",
         "name": "Get Workload Manager Context",
         "title": "Get WM Context",
         "type": "ccs.get_cloud_context",
         "base_type": "activity",
         "properties": {
-          "action_id": "161",
+          "action_id": "258",
           "action_timeout": 180,
           "cc_configuration": {
             "execute_action": "on_vm",
@@ -127,7 +127,7 @@
                   "app_ids": [
                     {
                       "id": "29",
-                      "name": "CentOS"
+                      "name": "CentOS Sample"
                     },
                     {
                       "id": "513",
@@ -151,7 +151,7 @@
                     },
                     {
                       "id": "33",
-                      "name": "RedHat"
+                      "name": "RedHat Sample"
                     },
                     {
                       "id": "1108",
@@ -159,45 +159,24 @@
                     },
                     {
                       "id": "35",
-                      "name": "Ubuntu"
+                      "name": "Ubuntu Sample"
                     },
                     {
                       "id": "39",
-                      "name": "Windows"
-                    }
-                  ],
-                  "cloud_account": [
-                    {
-                      "id": "ALL",
-                      "name": "All"
-                    }
-                  ],
-                  "cloud_region": [
-                    {
-                      "id": "ALL",
-                      "name": "All"
-                    }
-                  ],
-                  "service": [
-                    {
-                      "id": "ALL",
-                      "name": "All"
+                      "name": "Windows Sample"
                     }
                   ]
                 },
-                "resource_type": "cc_deploy_vm",
+                "resource_type": "app_profile",
                 "resource_type_meta_info": {
-                  "cc_deploy_vm": {
-                    "app_ids": "All",
-                    "cloud_account": "All",
-                    "cloud_region": "All",
-                    "service": "All"
+                  "app_profile": {
+                    "app_ids": "All"
                   }
                 }
               }
             ],
             "sync_vm": false,
-            "wf_availability_type": "ondemand"
+            "wf_availability_type": "lifecycle"
           },
           "cc_run_id": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CR6AR2NW2C5fsD836YeQI2vAfyI$",
           "continue_on_failure": false,
@@ -217,43 +196,43 @@
       {
         "unique_name": "definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm",
         "name": "JSONPath Query",
-        "title": "Get Job Details v1",
+        "title": "Get Deployment Details",
         "type": "corejava.jsonpathquery",
         "base_type": "activity",
         "properties": {
           "action_timeout": 180,
           "continue_on_failure": false,
-          "display_name": "Get Job Details v1",
-          "input_json": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+          "display_name": "Get Deployment Details",
+          "input_json": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
           "jsonpath_queries": [
             {
-              "jsonpath_query": "$.parentJobId",
-              "jsonpath_query_name": "parent_jobid",
+              "jsonpath_query": "$.parameters.appParams[?(@.name==\"install_sw_agent\")].value",
+              "jsonpath_query_name": "install_agent",
               "jsonpath_query_type": "string"
             },
             {
-              "jsonpath_query": "$.parentJobName",
-              "jsonpath_query_name": "parent_jobname",
-              "jsonpath_query_type": "string"
-            },
-            {
-              "jsonpath_query": "$.jobId",
-              "jsonpath_query_name": "tier_jobid",
-              "jsonpath_query_type": "string"
-            },
-            {
-              "jsonpath_query": "$.jobName",
-              "jsonpath_query_name": "tier_jobname",
+              "jsonpath_query": "$.parameters.appParams[?(@.name==\"parentJobName\")].value",
+              "jsonpath_query_name": "parentJobName",
               "jsonpath_query_type": "string"
             },
             {
               "jsonpath_query": "$.name",
-              "jsonpath_query_name": "node_name",
+              "jsonpath_query_name": "appTierName",
               "jsonpath_query_type": "string"
             },
             {
-              "jsonpath_query": "$.osName",
-              "jsonpath_query_name": "os_name",
+              "jsonpath_query": "$.id",
+              "jsonpath_query_name": "appTierId",
+              "jsonpath_query_type": "string"
+            },
+            {
+              "jsonpath_query": "$.virtualMachines[0].hostName",
+              "jsonpath_query_name": "hostname",
+              "jsonpath_query_type": "string"
+            },
+            {
+              "jsonpath_query": "$.virtualMachines[0].virtualMachineId",
+              "jsonpath_query_name": "vm_id",
               "jsonpath_query_type": "string"
             }
           ],
@@ -262,17 +241,18 @@
         "object_type": "definition_activity"
       },
       {
-        "unique_name": "definition_activity_01BHB2BUCIBNG5wRMqlk10FNIAFTXyDG5X3",
+        "unique_name": "definition_activity_01BM45NNUZG971n1ck8prR7vCDEv8CuoV2N",
         "name": "Generic CCS API Request",
-        "title": "Get Job Details v2",
+        "title": "Get VM Details",
         "type": "ccs.api_request",
         "base_type": "activity",
         "properties": {
           "action_timeout": 180,
+          "api_body": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
           "api_call_method": "GET",
           "continue_on_failure": false,
-          "display_name": "Get Job Details v2",
-          "relative_url": "/cloudcenter-ccm-backend/api/v2/jobs/$activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.tier_jobid$",
+          "display_name": "Get VM Details",
+          "relative_url": "/cloudcenter-ccm-backend/api/v1/virtualMachines/$activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.vm_id$",
           "runtime_user": {
             "override_target_runtime_user": false,
             "target_default": true
@@ -286,20 +266,20 @@
         "object_type": "definition_activity"
       },
       {
-        "unique_name": "definition_activity_01BHB2C6125VV0IlLoE5I7S2PR3C1NGy9Li",
+        "unique_name": "definition_activity_01BM4GTZICKPI1Ht6QtgsfpIx1pI6IKGZwt",
         "name": "JSONPath Query",
-        "title": "Get 'install_agent' Value",
+        "title": "Get OS Type",
         "type": "corejava.jsonpathquery",
         "base_type": "activity",
         "properties": {
           "action_timeout": 180,
           "continue_on_failure": false,
-          "display_name": "Get 'install_agent' Value",
-          "input_json": "$activity.definition_activity_01BHB2BUCIBNG5wRMqlk10FNIAFTXyDG5X3.output.response_body$",
+          "display_name": "Get OS Type",
+          "input_json": "$activity.definition_activity_01BM45NNUZG971n1ck8prR7vCDEv8CuoV2N.output.response_body$",
           "jsonpath_queries": [
             {
-              "jsonpath_query": "$.parameters.appParams[?(@.name==\"install_sw_agent\")].value",
-              "jsonpath_query_name": "install_agent",
+              "jsonpath_query": "$.osName",
+              "jsonpath_query_name": "os_name",
               "jsonpath_query_type": "string"
             }
           ],
@@ -323,17 +303,17 @@
           {
             "unique_name": "definition_activity_01BHB2CLHTPHS6WtCvsf7xGNrRNzU7ltBsH",
             "name": "Condition Branch",
-            "title": " Check 'osname' Value",
+            "title": " 'osname' = centos",
             "type": "logic.condition_block",
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "$activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.os_name$",
+                "left_operand": "$activity.definition_activity_01BM4GTZICKPI1Ht6QtgsfpIx1pI6IKGZwt.output.jsonpath_queries.os_name$",
                 "operator": "eq",
                 "right_operand": "centos"
               },
               "continue_on_failure": false,
-              "display_name": " Check 'osname' Value",
+              "display_name": " 'osname' = centos",
               "skip_execution": false
             },
             "object_type": "definition_activity",
@@ -349,41 +329,11 @@
                   "display_name": "Install Required Tools",
                   "input": {
                     "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                     "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                     "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "yum install -y wget bzip2 php"
-                  },
-                  "runtime_user": {
-                    "target_default": true
-                  },
-                  "skip_execution": false,
-                  "target": {
-                    "execute_on_this_target": true,
-                    "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q",
-                    "target_type": "ccsuite.integration_endpoint"
-                  },
-                  "workflow_id": "definition_workflow_01gD85jbeDkSP5TO2AYeuvkAJkbgBWyhY"
-                },
-                "object_type": "definition_activity"
-              },
-              {
-                "unique_name": "definition_activity_01BHB2D6D82FT1DxWXdsjkM5Y4S1yoMlJkL",
-                "name": "Install PHP",
-                "title": "Install PHP",
-                "type": "workflow.atomic_workflow",
-                "base_type": "subworkflow",
-                "properties": {
-                  "continue_on_failure": false,
-                  "display_name": "Install PHP",
-                  "input": {
-                    "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
-                    "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
-                    "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm; rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm; sudo yum remove php-common -y; sudo yum install -y php56w php56w-opcache php56w-xml php56w-mcrypt php56w-gd php56w-devel php56w-mysql php56w-intl php56w-mbstring; sudo service httpd restart"
+                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "yum install -y wget bzip2"
                   },
                   "runtime_user": {
                     "target_default": true
@@ -419,7 +369,7 @@
                     "base_type": "activity",
                     "properties": {
                       "condition": {
-                        "left_operand": "$activity.definition_activity_01BHB2C6125VV0IlLoE5I7S2PR3C1NGy9Li.output.jsonpath_queries.install_agent$",
+                        "left_operand": "$activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.install_agent$",
                         "operator": "mregex",
                         "right_operand": "^$"
                       },
@@ -447,21 +397,51 @@
                   {
                     "unique_name": "definition_activity_01BHB2DZEEDAQ19t3H3sy47uvNjHXFa5H6m",
                     "name": "Condition Branch",
-                    "title": "'install_agent' = AppD",
+                    "title": "'install_agent' = AppD-PHP",
                     "type": "logic.condition_block",
                     "base_type": "activity",
                     "properties": {
                       "condition": {
-                        "left_operand": "$activity.definition_activity_01BHB2C6125VV0IlLoE5I7S2PR3C1NGy9Li.output.jsonpath_queries.install_agent$",
-                        "operator": "mregex",
-                        "right_operand": "^AppD$"
+                        "left_operand": "$activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.install_agent$",
+                        "operator": "eq",
+                        "right_operand": "AppD-PHP"
                       },
                       "continue_on_failure": false,
-                      "display_name": "'install_agent' = AppD",
+                      "display_name": "'install_agent' = AppD-PHP",
                       "skip_execution": false
                     },
                     "object_type": "definition_activity",
                     "actions": [
+                      {
+                        "unique_name": "definition_activity_01BMP7YJ3YKYX2kp4fGSc7sY0JuG57aO6t3",
+                        "name": "Install PHP",
+                        "title": "Install PHP",
+                        "type": "workflow.atomic_workflow",
+                        "base_type": "subworkflow",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Install PHP",
+                          "input": {
+                            "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
+                            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
+                            "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
+                            "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
+                            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm; rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm; sudo yum remove php-common -y; sudo yum install -y php56w php56w-opcache php56w-xml php56w-mcrypt php56w-gd php56w-devel php56w-mysql php56w-intl php56w-mbstring; sudo service httpd restart"
+                          },
+                          "runtime_user": {
+                            "target_default": true
+                          },
+                          "skip_execution": false,
+                          "target": {
+                            "execute_on_this_target": true,
+                            "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q",
+                            "target_type": "ccsuite.integration_endpoint"
+                          },
+                          "workflow_id": "definition_workflow_01gD85jbeDkSP5TO2AYeuvkAJkbgBWyhY"
+                        },
+                        "object_type": "definition_activity"
+                      },
                       {
                         "unique_name": "definition_activity_01BHB2E9CNEVJ536h1TKbLK67lHs2OpBR0u",
                         "name": "Download AppD Agent",
@@ -473,11 +453,11 @@
                           "display_name": "Download AppD Agent",
                           "input": {
                             "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                             "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                             "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.01BEK321D62BD3gvN7vsic2VjrZPpzZ6a5E.global.01BEK321D62BD3gvN7vsic2VjrZPpzZ6a5E$/files/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CQZD62yfqBkCtl8OKBVo1f0MIu2$ -P /var/tmp"
+                            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.variable_01BEK321V3FBK3KksN38JIQxPDDykwtLb8c.global.variable_01BEK321V3FBK3KksN38JIQxPDDykwtLb8c$/files/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CQZD62yfqBkCtl8OKBVo1f0MIu2$ -P /tmp"
                           },
                           "runtime_user": {
                             "target_default": true
@@ -517,11 +497,11 @@
                           "display_name": "Download AppD Installation Script",
                           "input": {
                             "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                             "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                             "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.01B1LCSFBSWLN1Lu1Q2OpefIko4SXQ4XJAR.global.01B1LCSFBSWLN1Lu1Q2OpefIko4SXQ4XJAR$/agent-scripts/master/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$ -P /var/tmp"
+                            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.variable_01B1LCSFSACD946QarHlkr7b4ysqgQSbvWO.global.variable_01B1LCSFSACD946QarHlkr7b4ysqgQSbvWO$/agent-scripts/master/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$ -P /tmp"
                           },
                           "runtime_user": {
                             "target_default": true
@@ -547,11 +527,11 @@
                           "display_name": "Install AppD Agent",
                           "input": {
                             "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                             "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                             "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "chmod +x /var/tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$; /var/tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CQZD62yfqBkCtl8OKBVo1f0MIu2$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR33S5A64jIAfXXGJPj5tJd2eKv$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR4KS7D2ZFvqAcvdNqtOHVmOgQx$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.parent_jobname$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.tier_jobname$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.tier_jobid$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.node_name$"
+                            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "chmod +x /tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$; /tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CQZD62yfqBkCtl8OKBVo1f0MIu2$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR33S5A64jIAfXXGJPj5tJd2eKv$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BJRP5T7FLT20OYoXsnob2v4tRf7RwkVN6$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.parentJobName$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.appTierName$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.appTierId$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.hostname$"
                           },
                           "runtime_user": {
                             "target_default": true
@@ -576,9 +556,9 @@
                     "base_type": "activity",
                     "properties": {
                       "condition": {
-                        "left_operand": "$activity.definition_activity_01BHB2C6125VV0IlLoE5I7S2PR3C1NGy9Li.output.jsonpath_queries.install_agent$",
-                        "operator": "mregex",
-                        "right_operand": "^Tetration$"
+                        "left_operand": "$activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.install_agent$",
+                        "operator": "eq",
+                        "right_operand": "Tetration"
                       },
                       "continue_on_failure": false,
                       "display_name": "'install_agent' = Tetration",
@@ -597,11 +577,11 @@
                           "display_name": "Download Tetration Sensor",
                           "input": {
                             "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                             "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                             "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.01BEK321D62BD3gvN7vsic2VjrZPpzZ6a5E.global.01BEK321D62BD3gvN7vsic2VjrZPpzZ6a5E$/files/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR0PB7HyhU4zzmpf0sNV2Bn25CS$ -P /var/tmp"
+                            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.variable_01BEK321V3FBK3KksN38JIQxPDDykwtLb8c.global.variable_01BEK321V3FBK3KksN38JIQxPDDykwtLb8c$/files/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR0PB7HyhU4zzmpf0sNV2Bn25CS$ -P /tmp"
                           },
                           "runtime_user": {
                             "target_default": true
@@ -641,11 +621,11 @@
                           "display_name": "Install Tetration Sensor",
                           "input": {
                             "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                            "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                            "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                             "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                             "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "rpm -Uvh /var/tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR0PB7HyhU4zzmpf0sNV2Bn25CS$"
+                            "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "rpm -Uvh /tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR0PB7HyhU4zzmpf0sNV2Bn25CS$"
                           },
                           "runtime_user": {
                             "target_default": true
@@ -665,63 +645,63 @@
                   {
                     "unique_name": "definition_activity_01BHB2G8M01FW5qtjrhyBPdPyL18Jm6SmBc",
                     "name": "Condition Branch",
-                    "title": "'install_agent' = (AppD,Tetration)",
+                    "title": "'install_agent' = (AppD-PHP,Tetration)",
                     "type": "logic.condition_block",
                     "base_type": "activity",
                     "properties": {
                       "condition": {
-                        "left_operand": "$activity.definition_activity_01BHB2C6125VV0IlLoE5I7S2PR3C1NGy9Li.output.jsonpath_queries.install_agent$",
+                        "left_operand": "$activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.install_agent$",
                         "operator": "eq",
-                        "right_operand": "AppD,Tetration"
+                        "right_operand": "AppD-PHP,Tetration"
                       },
                       "continue_on_failure": false,
-                      "display_name": "'install_agent' = (AppD,Tetration)",
+                      "display_name": "'install_agent' = (AppD-PHP,Tetration)",
                       "skip_execution": false
                     },
                     "object_type": "definition_activity",
                     "actions": [
                       {
-                        "unique_name": "definition_activity_01BHB2GIIQCPB63Z5fUSb87loOIGF1Bx2ib",
+                        "unique_name": "definition_activity_01BKESARE0XSJ0D8y724KnhZuPx6svsO2hk",
                         "name": "Parallel Block",
-                        "title": "Install Agent",
+                        "title": "Parallel Block",
                         "type": "logic.parallel",
                         "base_type": "activity",
                         "properties": {
                           "continue_on_failure": false,
-                          "display_name": "Install Agent",
+                          "display_name": "Parallel Block",
                           "skip_execution": false
                         },
                         "object_type": "definition_activity",
                         "blocks": [
                           {
-                            "unique_name": "definition_activity_01BHB2GPC97MY7cxXsmfd4zzUAKenNy06Yl",
+                            "unique_name": "definition_activity_01BKESAYE1W2M5SyuGViHHxuc3MJ3Uwe36v",
                             "name": "Parallel Branch",
-                            "title": "AppD",
+                            "title": "AppD-PHP",
                             "type": "logic.parallel_block",
                             "base_type": "activity",
                             "properties": {
                               "continue_on_failure": false,
-                              "display_name": "AppD",
+                              "display_name": "AppD-PHP",
                               "skip_execution": false
                             },
                             "object_type": "definition_activity",
                             "actions": [
                               {
-                                "unique_name": "definition_activity_01BHB2GXG3YU14dNESuM3DJEoq0PPggpnFM",
-                                "name": "Download AppD Agent",
-                                "title": "Download AppD Agent",
+                                "unique_name": "definition_activity_01BMP87HGA83F2uGXW1cSbyXoxG2dgzzpWG",
+                                "name": "Install PHP",
+                                "title": "Install PHP",
                                 "type": "workflow.atomic_workflow",
                                 "base_type": "subworkflow",
                                 "properties": {
                                   "continue_on_failure": false,
-                                  "display_name": "Download AppD Agent",
+                                  "display_name": "Install PHP",
                                   "input": {
                                     "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                                     "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                                     "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.01BEK321D62BD3gvN7vsic2VjrZPpzZ6a5E.global.01BEK321D62BD3gvN7vsic2VjrZPpzZ6a5E$/files/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CQZD62yfqBkCtl8OKBVo1f0MIu2$ -P /var/tmp"
+                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm; rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm; sudo yum remove php-common -y; sudo yum install -y php56w php56w-opcache php56w-xml php56w-mcrypt php56w-gd php56w-devel php56w-mysql php56w-intl php56w-mbstring; sudo service httpd restart"
                                   },
                                   "runtime_user": {
                                     "target_default": true
@@ -737,7 +717,37 @@
                                 "object_type": "definition_activity"
                               },
                               {
-                                "unique_name": "definition_activity_01BHB2H58CZRU1g9XrYWUWpQ1IvZq6iUfDx",
+                                "unique_name": "definition_activity_01BJX6WOPP15C1kHAWHbI74aCR9RNS54YRB",
+                                "name": "Download AppD Agent",
+                                "title": "Download AppD Agent",
+                                "type": "workflow.atomic_workflow",
+                                "base_type": "subworkflow",
+                                "properties": {
+                                  "continue_on_failure": false,
+                                  "display_name": "Download AppD Agent",
+                                  "input": {
+                                    "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
+                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
+                                    "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
+                                    "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
+                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.variable_01BEK321V3FBK3KksN38JIQxPDDykwtLb8c.global.variable_01BEK321V3FBK3KksN38JIQxPDDykwtLb8c$/files/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CQZD62yfqBkCtl8OKBVo1f0MIu2$ -P /tmp"
+                                  },
+                                  "runtime_user": {
+                                    "target_default": true
+                                  },
+                                  "skip_execution": false,
+                                  "target": {
+                                    "execute_on_this_target": true,
+                                    "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q",
+                                    "target_type": "ccsuite.integration_endpoint"
+                                  },
+                                  "workflow_id": "definition_workflow_01gD85jbeDkSP5TO2AYeuvkAJkbgBWyhY"
+                                },
+                                "object_type": "definition_activity"
+                              },
+                              {
+                                "unique_name": "definition_activity_01BJX6WTFUMJ365mfNIj7XBULSE8s6vXCkm",
                                 "name": "Sleep",
                                 "title": "Sleep",
                                 "type": "core.sleep",
@@ -751,7 +761,7 @@
                                 "object_type": "definition_activity"
                               },
                               {
-                                "unique_name": "definition_activity_01BHB2HCOG8YZ7PAdpTwoSw9W0RTCbk8OaP",
+                                "unique_name": "definition_activity_01BJX6WWM2FNW5D1w8s7Nscqfa7iZYBLjHv",
                                 "name": "Download AppD Installation Script",
                                 "title": "Download AppD Installation Script",
                                 "type": "workflow.atomic_workflow",
@@ -761,11 +771,11 @@
                                   "display_name": "Download AppD Installation Script",
                                   "input": {
                                     "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                                     "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                                     "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.01B1LCSFBSWLN1Lu1Q2OpefIko4SXQ4XJAR.global.01B1LCSFBSWLN1Lu1Q2OpefIko4SXQ4XJAR$/agent-scripts/master/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$ -P /var/tmp"
+                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.variable_01B1LCSFSACD946QarHlkr7b4ysqgQSbvWO.global.variable_01B1LCSFSACD946QarHlkr7b4ysqgQSbvWO$/agent-scripts/master/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$ -P /tmp"
                                   },
                                   "runtime_user": {
                                     "target_default": true
@@ -781,7 +791,7 @@
                                 "object_type": "definition_activity"
                               },
                               {
-                                "unique_name": "definition_activity_01BHB2HLGKSXB68MgW0QQ3zRLdly6aU8IqQ",
+                                "unique_name": "definition_activity_01BJX6X3A55OH6nPAvsufiaIHfGFdfkt8ob",
                                 "name": "Install AppD Agent",
                                 "title": "Install AppD Agent",
                                 "type": "workflow.atomic_workflow",
@@ -791,11 +801,11 @@
                                   "display_name": "Install AppD Agent",
                                   "input": {
                                     "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                                     "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                                     "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "chmod +x /var/tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$; /var/tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CQZD62yfqBkCtl8OKBVo1f0MIu2$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR33S5A64jIAfXXGJPj5tJd2eKv$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR4KS7D2ZFvqAcvdNqtOHVmOgQx$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.parent_jobname$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.tier_jobname$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.tier_jobid$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.node_name$"
+                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "chmod +x /tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$; /tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR1X055AIv4QzjmByQrMmQ6H96r$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CQZD62yfqBkCtl8OKBVo1f0MIu2$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR33S5A64jIAfXXGJPj5tJd2eKv$ $workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BJRP5T7FLT20OYoXsnob2v4tRf7RwkVN6$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.parentJobName$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.appTierName$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.appTierId$ $activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.hostname$"
                                   },
                                   "runtime_user": {
                                     "target_default": true
@@ -813,7 +823,7 @@
                             ]
                           },
                           {
-                            "unique_name": "definition_activity_01BHB2HTAC73969nb2hbiqu7NfPM0tJdoeb",
+                            "unique_name": "definition_activity_01BKESB1P3N4I72DsBK8uC1PWdqhn35zYPJ",
                             "name": "Parallel Branch",
                             "title": "Tetration",
                             "type": "logic.parallel_block",
@@ -826,7 +836,7 @@
                             "object_type": "definition_activity",
                             "actions": [
                               {
-                                "unique_name": "definition_activity_01BHB2I2AKFZT0AQT4v0DRFdjOO6oxBE0WW",
+                                "unique_name": "definition_activity_01BKET5TOTL241jshM5WfEv6QLkBDPA1ow4",
                                 "name": "Download Tetration Sensor",
                                 "title": "Download Tetration Sensor",
                                 "type": "workflow.atomic_workflow",
@@ -836,11 +846,11 @@
                                   "display_name": "Download Tetration Sensor",
                                   "input": {
                                     "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                                     "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                                     "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.01BEK321D62BD3gvN7vsic2VjrZPpzZ6a5E.global.01BEK321D62BD3gvN7vsic2VjrZPpzZ6a5E$/files/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR0PB7HyhU4zzmpf0sNV2Bn25CS$ -P /var/tmp"
+                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "wget $global.variable_01BEK321V3FBK3KksN38JIQxPDDykwtLb8c.global.variable_01BEK321V3FBK3KksN38JIQxPDDykwtLb8c$/files/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR0PB7HyhU4zzmpf0sNV2Bn25CS$ -P /tmp"
                                   },
                                   "runtime_user": {
                                     "target_default": true
@@ -856,7 +866,7 @@
                                 "object_type": "definition_activity"
                               },
                               {
-                                "unique_name": "definition_activity_01BHB2IB4HBKQ1bP8DITIXWv8RYzHUcd3iF",
+                                "unique_name": "definition_activity_01BKET823LB9709lGmeJGDixR8EMveuKaRI",
                                 "name": "Sleep",
                                 "title": "Sleep",
                                 "type": "core.sleep",
@@ -870,7 +880,7 @@
                                 "object_type": "definition_activity"
                               },
                               {
-                                "unique_name": "definition_activity_01BHB2IJ0E8MO2hioNy97BpGbtdu4pLat2S",
+                                "unique_name": "definition_activity_01BKETAFG8ITB7Fspq7edyhcCdVbdX6Pe7Q",
                                 "name": "Install Tetration Sensor",
                                 "title": "Install Tetration Sensor",
                                 "type": "workflow.atomic_workflow",
@@ -880,11 +890,11 @@
                                   "display_name": "Install Tetration Sensor",
                                   "input": {
                                     "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                                     "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                                     "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "rpm -Uvh /var/tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR0PB7HyhU4zzmpf0sNV2Bn25CS$"
+                                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "rpm -Uvh /tmp/$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.static.variable_workflow_01BHB2B1CR0PB7HyhU4zzmpf0sNV2Bn25CS$"
                                   },
                                   "runtime_user": {
                                     "target_default": true
@@ -912,17 +922,17 @@
           {
             "unique_name": "definition_activity_01BHB2IRDCJ8778ZVjn3d4TL3w4ilsT4Dwn",
             "name": "Condition Branch",
-            "title": "Condition Branch",
+            "title": " 'osname' = ubuntu",
             "type": "logic.condition_block",
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "$activity.definition_activity_01BHB2BKEHH172hzgkVuFXCciSmzHaWXNsm.output.jsonpath_queries.os_name$",
+                "left_operand": "$activity.definition_activity_01BM4GTZICKPI1Ht6QtgsfpIx1pI6IKGZwt.output.jsonpath_queries.os_name$",
                 "operator": "eq",
                 "right_operand": "ubuntu"
               },
               "continue_on_failure": false,
-              "display_name": "Condition Branch",
+              "display_name": " 'osname' = ubuntu",
               "skip_execution": false
             },
             "object_type": "definition_activity",
@@ -937,12 +947,12 @@
                   "continue_on_failure": false,
                   "display_name": "Install Required Tools",
                   "input": {
-                    "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
-                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.action_type$",
-                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BHB2BA1SEK7363abFLGLDq4jnJcfW3YUP.output.response_body$",
+                    "variable_workflow_015O9MPWA93B45Wbd5Ga6NXdHHROkuISJxC": "$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$$workflow.definition_workflow_01BHB2AIED06K78R4rRDziCwT1gYUGFiUUX.input.variable_workflow_01BHB2B1CQWUF74dZyKUgeiDa0dVkKMmBUk$",
+                    "variable_workflow_01gYxTTIiozpeC0G7XGX3h938xWZW4k92": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.action_type$",
+                    "variable_workflow_01gmGB1E79m7TfL8YMDUFjfBqxcIAKSbf": "$activity.definition_activity_01BJTHPHW8UTF1phE22Qv710E2TehkY2i3H.output.response_body$",
                     "variable_workflow_01gmT7gkCb94ey8Tqd849LGeJvdfmsYrq": 10,
                     "variable_workflow_01gmUjEx0Z3LZOPK3u01H2tmZyv1QIFk6": 30,
-                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "apt-get install -y wget bzip2 php"
+                    "variable_workflow_01gmgK3LkOa8JMelklBT5K2eV29ZlPpqv": "apt-get install -y wget bzip2"
                   },
                   "runtime_user": {
                     "target_default": true
@@ -975,8 +985,44 @@
       }
     ],
     "categories": [
-      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+      "category_019NKU4AT8WNE7IacVuD21kP7kEkXI0yUCU"
     ]
+  },
+  "categories": {
+    "category_019NKU4AT8WNE7IacVuD21kP7kEkXI0yUCU": {
+      "unique_name": "category_019NKU4AT8WNE7IacVuD21kP7kEkXI0yUCU",
+      "name": "WM_Integrated_WFs",
+      "title": "WM_Integrated_WFs",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "Workflows integrated with app profiles in Workload Manager",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "variables": {
+    "variable_01B1LCSFSACD946QarHlkr7b4ysqgQSbvWO": {
+      "unique_name": "variable_01B1LCSFSACD946QarHlkr7b4ysqgQSbvWO",
+      "properties": {
+        "value": "https://raw.githubusercontent.com/cpsg-galaxy",
+        "scope": "global",
+        "name": "cpsg-galaxy-github",
+        "type": "datatype.string",
+        "is_required": false
+      },
+      "object_type": "variable"
+    },
+    "variable_01BEK321V3FBK3KksN38JIQxPDDykwtLb8c": {
+      "unique_name": "variable_01BEK321V3FBK3KksN38JIQxPDDykwtLb8c",
+      "properties": {
+        "value": "https://cpsg-galaxy-s3-bucket.s3-us-west-1.amazonaws.com",
+        "scope": "global",
+        "name": "cpsg-galaxy-s3-bucket",
+        "type": "datatype.string",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
   },
   "atomic_workflows": [
     "definition_workflow_01gD85jbeDkSP5TO2AYeuvkAJkbgBWyhY"
