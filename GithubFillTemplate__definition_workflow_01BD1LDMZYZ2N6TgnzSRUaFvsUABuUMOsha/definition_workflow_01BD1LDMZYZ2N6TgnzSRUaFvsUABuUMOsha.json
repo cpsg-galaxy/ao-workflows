@@ -1,0 +1,218 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01BD1LDMZYZ2N6TgnzSRUaFvsUABuUMOsha",
+    "name": "Fill Template from Github",
+    "title": "Fill Template from Github",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "DB_USERNAME",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BD28Q352IH67jA35vWs5XwQt4wfK4rf7e",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "VERSION",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BD28XT0O6PO4j89SRJUR9GgQklT00QvvQ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "DB_PASSWORD",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BD2AEDDA9AY3ujwcOay9yynYZZDUmi0z5",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "YAML",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BD5QE9P8EML3ljKrIMCEjIgxb2qznBPo5",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "DOCKER_REGISTRY",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BI7D1MOT9MS5Fj0WQ0cc9L4BNmEirhiSX",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "URL",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BD283B9GNXK3fvhH1Sg4n3hhMMWklcxPj",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "DB_HOST",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BD28B03ZDRL2ePtStmcO6ssgLpNNQVqns",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "Kubecon Demo",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": true,
+      "display_name": "Fill Template from Github",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_01BD1QYW2X2EK4KRS7zFhabpCCiTvG61Dma",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01BD1LJJ3MGA64b8R9OqkKRNI13DXlfnOdo",
+        "name": "HTTP Request",
+        "title": "Get Template",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "display_name": "Get Template",
+          "method": "GET",
+          "relative_url": "$workflow.definition_workflow_01BD1LDMZYZ2N6TgnzSRUaFvsUABuUMOsha.input.variable_workflow_01BD283B9GNXK3fvhH1Sg4n3hhMMWklcxPj$",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BD1QYW2X2EK4KRS7zFhabpCCiTvG61Dma"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BD1T4KZXCE926Up379QjqLg8VrSDwg1IR",
+        "name": "Replace String",
+        "title": "Replace Strings in Template",
+        "type": "core.replacestring",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Replace Strings in Template",
+          "input_string": "$activity.definition_activity_01BD1LJJ3MGA64b8R9OqkKRNI13DXlfnOdo.output.response_body$",
+          "replace_list": [
+            {
+              "replaced_string": "{{ .VERSION }}",
+              "replacement_string": "$workflow.definition_workflow_01BD1LDMZYZ2N6TgnzSRUaFvsUABuUMOsha.input.variable_workflow_01BD28XT0O6PO4j89SRJUR9GgQklT00QvvQ$"
+            },
+            {
+              "replaced_string": "{{ .DB_USERNAME }}",
+              "replacement_string": "$workflow.definition_workflow_01BD1LDMZYZ2N6TgnzSRUaFvsUABuUMOsha.input.variable_workflow_01BD28Q352IH67jA35vWs5XwQt4wfK4rf7e$"
+            },
+            {
+              "replaced_string": "{{ .DB_PASSWORD }}",
+              "replacement_string": "$workflow.definition_workflow_01BD1LDMZYZ2N6TgnzSRUaFvsUABuUMOsha.input.variable_workflow_01BD2AEDDA9AY3ujwcOay9yynYZZDUmi0z5$"
+            },
+            {
+              "replaced_string": "{{ .DB_HOSTS }}",
+              "replacement_string": "$workflow.definition_workflow_01BD1LDMZYZ2N6TgnzSRUaFvsUABuUMOsha.input.variable_workflow_01BD28B03ZDRL2ePtStmcO6ssgLpNNQVqns$"
+            },
+            {
+              "replaced_string": "{{ .DOCKER_REGISTRY }}",
+              "replacement_string": "$workflow.definition_workflow_01BD1LDMZYZ2N6TgnzSRUaFvsUABuUMOsha.input.variable_workflow_01BI7D1MOT9MS5Fj0WQ0cc9L4BNmEirhiSX$"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BD5QHTWWT9C0FqYS0DdGHDoautESB4Fcu",
+        "name": "Set Variables",
+        "title": "Set YAML Output",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set YAML Output",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01BD1LDMZYZ2N6TgnzSRUaFvsUABuUMOsha.output.variable_workflow_01BD5QE9P8EML3ljKrIMCEjIgxb2qznBPo5$",
+              "variable_value_new": "$activity.definition_activity_01BD1T4KZXCE926Up379QjqLg8VrSDwg1IR.output.result_string$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01BD1QYW2X2EK4KRS7zFhabpCCiTvG61Dma": {
+      "unique_name": "definition_target_01BD1QYW2X2EK4KRS7zFhabpCCiTvG61Dma",
+      "name": "raw.githubusercontent.com",
+      "title": "raw.githubusercontent.com",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "raw.githubusercontent.com",
+        "host": "raw.githubusercontent.com",
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  }
+}
