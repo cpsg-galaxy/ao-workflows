@@ -53,7 +53,7 @@
       {
         "unique_name": "definition_activity_01D0EGGG5JM164fGAxP8jF2aFlp0n42iDHW",
         "name": "HTTP Request",
-        "title": "Get CCP Token",
+        "title": "Get CCP Cookie",
         "type": "web-service.http_request",
         "base_type": "activity",
         "properties": {
@@ -67,7 +67,7 @@
               "value": "application/x-www-form-urlencoded"
             }
           ],
-          "display_name": "Get CCP Token",
+          "display_name": "Get CCP Cookie",
           "method": "POST",
           "relative_url": "/2/system/login/?username=admin\u0026password=Welcome2Galaxy42!",
           "runtime_user": {
@@ -87,13 +87,13 @@
       {
         "unique_name": "definition_activity_01D0ISQUZ9NAM3MVF3Nl7tcpzeRvzFpoohL",
         "name": "Substring",
-        "title": "Get Cookie",
+        "title": "Set Variable - Cookie",
         "type": "core.substring",
         "base_type": "activity",
         "properties": {
           "begin": 14,
           "continue_on_failure": false,
-          "display_name": "Get Cookie",
+          "display_name": "Set Variable - Cookie",
           "end": 209,
           "skip_execution": false,
           "source": "$activity.definition_activity_01D0EGGG5JM164fGAxP8jF2aFlp0n42iDHW.output.cookie[0]$"
@@ -169,7 +169,7 @@
           "continue_on_failure": false,
           "display_name": "Get Manifest",
           "method": "GET",
-          "relative_url": "/mchenetz/hx1-ccp/patch-3/glxy_ccp-env_manifest.json",
+          "relative_url": "/cpsg-galaxy/hx1-ccp/master/glxy_ccp-env_manifest.json",
           "runtime_user": {
             "override_target_runtime_user": false,
             "target_default": true
@@ -247,9 +247,8 @@
           "continue_on_failure": false,
           "display_name": "Get Cluster Template",
           "method": "GET",
-          "relative_url": "/mchenetz/hx1-ccp/master/glxy_ccp_create_vmw-tc.json",
+          "relative_url": "/cpsg-galaxy/hx1-ccp/master/glxy_ccp_create_vmw-tc.json",
           "runtime_user": {
-            "override_target_runtime_user": false,
             "target_default": true
           },
           "skip_execution": false,
