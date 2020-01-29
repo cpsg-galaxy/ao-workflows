@@ -1,0 +1,114 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01BNPWZAR4TUF5TFX97EbJggH4sxwl8EzOk",
+    "name": "Terraform Example",
+    "title": "Terraform Example",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Terraform Example",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01DB6QCE3TI7M1TkpiqOiaywMV1mQUEhbYd",
+        "name": "Get Template Input Variables",
+        "title": "Get VPC Variables",
+        "type": "terraform.get_template_input_variables",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get VPC Variables",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01DAK6RI5K3LG5DVDlObDN9XKQxo8UA5ZH4"
+          },
+          "template_name": "test",
+          "templates_path": "~/tf"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01DAKMCTLC4Q64F85R0D1VYsao0GmSoBKZu",
+        "name": "Execute Template",
+        "title": "Create VPC Google",
+        "type": "terraform.execute_template",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Create VPC Google",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01DAK6RI5K3LG5DVDlObDN9XKQxo8UA5ZH4"
+          },
+          "template_name": "test",
+          "templates_path": "~/tf"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01DAK6RI5K3LG5DVDlObDN9XKQxo8UA5ZH4": {
+      "unique_name": "definition_target_01DAK6RI5K3LG5DVDlObDN9XKQxo8UA5ZH4",
+      "name": "Terraform",
+      "title": "Terraform",
+      "type": "terraform.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "bash_shell": "/bin/bash",
+        "default_runtime_user_id": "definition_runtime_user_01BH16597O8PB72JNzAVlj801ZRl00sa06Y",
+        "display_name": "Terraform",
+        "host": "35.215.60.144",
+        "port": 222
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01BH16597O8PB72JNzAVlj801ZRl00sa06Y": {
+      "unique_name": "definition_runtime_user_01BH16597O8PB72JNzAVlj801ZRl00sa06Y",
+      "name": "cloudbox",
+      "title": "cloudbox",
+      "type": "runtime_user.terminal_key_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "cloudbox",
+        "key": "*****",
+        "user": "*****"
+      }
+    }
+  }
+}
