@@ -1,0 +1,207 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01EY9XS4GZH4H3CfkWuflaSUU0wqTFLKRk1",
+    "name": "WMAO Service Template",
+    "title": "WMAO Service Template",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "CC_RUN_ID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01EY9Z5GN7NXW1BAvS2fIu4iTIBHcfZhpGt",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "depends_on": "CC",
+      "display_name": "WMAO Service Template",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01EYYK16LMZFV2x2WDuaQhTaAd0P0MjFWNL",
+        "name": "Get Workload Manager Context",
+        "title": "Get Workload Manager Context",
+        "type": "ccs.get_cloud_context",
+        "base_type": "activity",
+        "properties": {
+          "action_id": "366",
+          "action_timeout": 180,
+          "cc_configuration": {
+            "execute_action": "external",
+            "reboot_vm": false,
+            "resource_mappings": [
+              {
+                "applied_to": {
+                  "service": [
+                    {
+                      "id": "ALL",
+                      "name": "All"
+                    }
+                  ]
+                },
+                "resource_type": "service",
+                "resource_type_meta_info": {
+                  "service": {
+                    "service": "All"
+                  }
+                }
+              }
+            ],
+            "sync_vm": false,
+            "wf_availability_type": "lifecycle"
+          },
+          "cc_run_id": "$workflow.definition_workflow_01EY9XS4GZH4H3CfkWuflaSUU0wqTFLKRk1.input.variable_workflow_01EY9Z5GN7NXW1BAvS2fIu4iTIBHcfZhpGt$",
+          "continue_on_failure": false,
+          "display_name": "Get Workload Manager Context",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F0ORBQ6J3SX4NM1gOj8eljAGJCjuHzXE3",
+        "name": "Read Table from JSON",
+        "title": "Read Table from JSON",
+        "type": "corejava.read_table_from_json",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Read Table from JSON",
+          "input_json": "$activity.definition_activity_01EYYK16LMZFV2x2WDuaQhTaAd0P0MjFWNL.output.response_body$",
+          "jsonpath_query": "$",
+          "persist_output": false,
+          "populate_columns": false,
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "status",
+              "column_type": "string"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F0OQZL6DL966fdv86tmNr29XoGQGKYosK",
+        "name": "Condition Block",
+        "title": "Job Status",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Job Status",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01F0OQZV7PMSA2oIqEK1woJjp7tNPwP4es9",
+            "name": "Condition Branch",
+            "title": "Job Starting",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01F0ORBQ6J3SX4NM1gOj8eljAGJCjuHzXE3.output.read_table_from_json[0].status$",
+                "operator": "eq",
+                "right_operand": "JobStarting"
+              },
+              "continue_on_failure": false,
+              "display_name": "Job Starting",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01F0OR02YRURD6cOUnZcb9lSU2R9Ma0A3wp",
+            "name": "Condition Branch",
+            "title": "Job Stopping",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01F0ORBQ6J3SX4NM1gOj8eljAGJCjuHzXE3.output.read_table_from_json[0].status$",
+                "operator": "eq",
+                "right_operand": "JobStopping"
+              },
+              "continue_on_failure": false,
+              "display_name": "Job Stopping",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01F0OSUTTO5O74zBjBFEQoSpkLHOCQrjhyq",
+            "name": "Condition Branch",
+            "title": "Job Suspending",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01F0ORBQ6J3SX4NM1gOj8eljAGJCjuHzXE3.output.read_table_from_json[0].status$",
+                "operator": "eq",
+                "right_operand": "JobSuspending"
+              },
+              "continue_on_failure": false,
+              "display_name": "Job Suspending",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01F0OTMNM1CW5744a0UB8fVlqhH57MHTEU5",
+            "name": "Condition Branch",
+            "title": "Job Resuming",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01F0ORBQ6J3SX4NM1gOj8eljAGJCjuHzXE3.output.read_table_from_json[0].status$",
+                "operator": "eq",
+                "right_operand": "JobResuming"
+              },
+              "continue_on_failure": false,
+              "display_name": "Job Resuming",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
