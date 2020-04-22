@@ -7,15 +7,39 @@
     "base_type": "workflow",
     "variables": [
       {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "Created",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FA5YECBB3M31lsYt7QeAzo72eloIkooBj",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "InstanceInfo",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FA6K8NZ7V170QumWfgCk8iryyuPmSu7vZ",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
           "scope": "input",
-          "name": "Wordpress Instance Name",
+          "name": "Wordpress Username",
           "type": "datatype.string",
           "is_required": true
         },
-        "unique_name": "variable_workflow_01FA6KQRZQYGA4FB84ZwAKgQ2T4wLTqoxbJ",
+        "unique_name": "variable_workflow_01FA6L5HCFO403TAnhgzCwckVDmgInDrQbD",
         "object_type": "variable_workflow"
       },
       {
@@ -58,60 +82,24 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "local",
-          "name": "MySQL Address",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FA6QX23PZIC53nJDQZCVwKk5ga5Idaf7n",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "Wordpress Username",
-          "type": "datatype.string",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01FA6L5HCFO403TAnhgzCwckVDmgInDrQbD",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "InstanceInfo",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FA6K8NZ7V170QumWfgCk8iryyuPmSu7vZ",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": false,
-          "scope": "local",
-          "name": "Created",
-          "type": "datatype.boolean",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FA5YECBB3M31lsYt7QeAzo72eloIkooBj",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
           "scope": "input",
           "name": "DB Password",
           "type": "datatype.string",
           "is_required": true
         },
         "unique_name": "variable_workflow_01FA6NIX8WWFZ1CG0actOLasL1UtPyZSxSI",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "MySQL Address",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FA6QX23PZIC53nJDQZCVwKk5ga5Idaf7n",
         "object_type": "variable_workflow"
       }
     ],
@@ -338,6 +326,30 @@
         ]
       },
       {
+        "unique_name": "definition_activity_01FAE3N1623HK69Pa2jkkqN277pxMoaJ05u",
+        "name": "Execute Linux/Unix SSH Command",
+        "title": "Create Database",
+        "type": "terminal.ssh_command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "command": "mysql -h $workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.local.variable_workflow_01FA6QX23PZIC53nJDQZCVwKk5ga5Idaf7n$ -u $workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6LVB9J32X5VazPp2HOveShwaGFHDDPw$ -p $workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6NIX8WWFZ1CG0actOLasL1UtPyZSxSI$ -e \"create database $workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6LN3HD0QR3YqV8K4iPnzd9I7DVVq4Vv$;\"",
+          "command_timeout": 60,
+          "continue_on_failure": false,
+          "display_name": "Create Database",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BH1LFDP5YSK2v6CSRvtIUvzHYyP6q4IqS"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
         "unique_name": "definition_activity_01FA639EOXSTI1lqZz0JqZpqERnPVwThhnw",
         "name": "Execute Linux/Unix SSH Command",
         "title": "Install Wordpress on Kubernetes",
@@ -345,7 +357,7 @@
         "base_type": "activity",
         "properties": {
           "action_timeout": 180,
-          "command": "helm install $workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6KQRZQYGA4FB84ZwAKgQ2T4wLTqoxbJ$\n  --set wordpressUsername=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6L5HCFO403TAnhgzCwckVDmgInDrQbD$ \n  --set wordpressPassword=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6LE21329Y3ce6moI1SyvMErF12H2Vej$ \n -- set mariadb.enabled=false\n --set externalDatabase.host=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.local.variable_workflow_01FA6QX23PZIC53nJDQZCVwKk5ga5Idaf7n$\n --set externalDatabase.user=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6LVB9J32X5VazPp2HOveShwaGFHDDPw$\n --set externalDatabase.password=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6NIX8WWFZ1CG0actOLasL1UtPyZSxSI$\n --set externalDatabase.database=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6LN3HD0QR3YqV8K4iPnzd9I7DVVq4Vv$\n --set externalDatabase.port=3306 \n    bitnami/wordpress",
+          "command": "helm install bitnami/wordpress --set wordpressUsername=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6L5HCFO403TAnhgzCwckVDmgInDrQbD$ --set wordpressPassword=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6LE21329Y3ce6moI1SyvMErF12H2Vej$ --set mariadb.enabled=false --set externalDatabase.host=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.local.variable_workflow_01FA6QX23PZIC53nJDQZCVwKk5ga5Idaf7n$ --set externalDatabase.user=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6LVB9J32X5VazPp2HOveShwaGFHDDPw$ --set externalDatabase.password=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6NIX8WWFZ1CG0actOLasL1UtPyZSxSI$ --set externalDatabase.database=$workflow.definition_workflow_01F7IG9BWZEXH7EugoyCqZiu6UFJt30h0Uf.input.variable_workflow_01FA6LN3HD0QR3YqV8K4iPnzd9I7DVVq4Vv$ --set externalDatabase.port=3306",
           "command_timeout": 60,
           "continue_on_failure": false,
           "display_name": "Install Wordpress on Kubernetes",
@@ -426,7 +438,7 @@
     }
   },
   "atomic_workflows": [
-    "definition_workflow_01F3M9UNSF1NP3xGKKUZ62wG7E6SIVnOFJg",
-    "definition_workflow_01F42M70W21TL4ZuneBOLdoHD9ahywUqLvE"
+    "definition_workflow_01F42M70W21TL4ZuneBOLdoHD9ahywUqLvE",
+    "definition_workflow_01F3M9UNSF1NP3xGKKUZ62wG7E6SIVnOFJg"
   ]
 }
