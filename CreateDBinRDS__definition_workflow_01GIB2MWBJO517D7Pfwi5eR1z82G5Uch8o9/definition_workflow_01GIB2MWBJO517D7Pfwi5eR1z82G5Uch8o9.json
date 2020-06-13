@@ -1,0 +1,511 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9",
+    "name": "CreateDBinRDS in US-East-2",
+    "title": "CreateDBinRDS in US-East-2",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "DBPassword",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01GICFIEUFWR55CJXY7aoTwH2Wy6IWOAjpX",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "Endpoint",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01GIBKHNOH9Z50clYsefM512pnRJjP2ng7j",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "Address",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01GIBLUNT8JMM2GbmF0txlptF9aSlNttUsN",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "Provisioned",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01GIBRNM1OQ833OVisbhDFWrkkpW5fi50Za",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "DBUsername",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01GIC3NLU487E6XE50pfMQBKMtggFr5e8vr",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "DBInstanceName",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01GIC4E7CDVK56DmMBOcsGOE9yR9MLHZFHP",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "CreateDBinRDS in US-East-2",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01GIB3B5U3XK21J1Ep7fQApLjm8YnxMte8S",
+        "name": "Create DB Instance",
+        "title": "Create DB Instance",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Create DB Instance",
+          "input": {
+            "variable_workflow_01F42MV87U1M73PAJyI8qqDfp81viCp6HYD": "$workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.input.variable_workflow_01GIC4E7CDVK56DmMBOcsGOE9yR9MLHZFHP$",
+            "variable_workflow_01F42N6PK772G3HGDIuEJRc2IhDEY7VSeoY": "$workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.input.variable_workflow_01GIC3NLU487E6XE50pfMQBKMtggFr5e8vr$",
+            "variable_workflow_01F42Q4J4HSL74q5A5FC05vZ0SXu8NyCeEc": "$workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.input.variable_workflow_01GICFIEUFWR55CJXY7aoTwH2Wy6IWOAjpX$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01DO4NWYEOPAY033BIaCGRTTpE8oH2y07VJ",
+            "target_type": "aws.endpoint"
+          },
+          "workflow_id": "definition_workflow_01F42M70W21TL4ZuneBOLdoHD9ahywUqLvE"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01GIBW09067183bjzkDBP3SMUwAh7PN25G6",
+        "name": "While Loop",
+        "title": "Loop until Provisioned=True",
+        "type": "logic.while",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Loop until Provisioned=True",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01GIBW0QPDRJS4iyJaxxk8Qx50mT7EVWrFS",
+            "name": "Condition Branch",
+            "title": "Check If Provisioned State=True",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.local.variable_workflow_01GIBRNM1OQ833OVisbhDFWrkkpW5fi50Za$",
+                "operator": "ne",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Check If Provisioned State=True",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01GIB8L29BET06dPwfJjd2kB2X9uqOAq2mL",
+                "name": "Describe RDS Instances",
+                "title": "Describe RDS Instances",
+                "type": "workflow.atomic_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Describe RDS Instances",
+                  "input": {
+                    "variable_workflow_01F3MDH2CN2PW53NWmh4JFMDKMKO5DAN8oC": "us-east-2"
+                  },
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "execute_on_this_target": true,
+                    "target_id": "definition_target_01DO4NWYEOPAY033BIaCGRTTpE8oH2y07VJ",
+                    "target_type": "aws.endpoint"
+                  },
+                  "workflow_id": "definition_workflow_01F3M9UNSF1NP3xGKKUZ62wG7E6SIVnOFJg"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01GIBDDXH8M6I2FCrKNsRozwgAAdZbYPjm3",
+                "name": "Read Table from JSON",
+                "title": "Get DBInstanceIdentifier, Endpoint and DBInstanceStatus",
+                "type": "corejava.read_table_from_json",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Get DBInstanceIdentifier, Endpoint and DBInstanceStatus",
+                  "input_json": "$activity.definition_activity_01GIB8L29BET06dPwfJjd2kB2X9uqOAq2mL.output.variable_workflow_01F3MHAEWLTEM38UBtNcGHFIc3qc1GYmDG6$",
+                  "jsonpath_query": "$.DescribeDBInstancesResponse.DescribeDBInstancesResult.DBInstances.DBInstance",
+                  "persist_output": false,
+                  "populate_columns": false,
+                  "skip_execution": false,
+                  "table_columns": [
+                    {
+                      "column_name": "DBInstanceIdentifier",
+                      "column_type": "string"
+                    },
+                    {
+                      "column_name": "Endpoint",
+                      "column_type": "string"
+                    },
+                    {
+                      "column_name": "DBInstanceStatus",
+                      "column_type": "string"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01GIBCYBAKNIY34SLiUryZ2MjEuQEzoj4uD",
+                "name": "For Each",
+                "title": "Loop Through DBInstances",
+                "type": "logic.for_each",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Loop Through DBInstances",
+                  "skip_execution": false,
+                  "source_array": "$activity.definition_activity_01GIBDDXH8M6I2FCrKNsRozwgAAdZbYPjm3.output.read_table_from_json$"
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01GIBGUZPL0XR3KuXwQPxyn8Z1GPyN9faZi",
+                    "name": "Condition Block",
+                    "title": "Check for correct instance identifier",
+                    "type": "logic.if_else",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Check for correct instance identifier",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "blocks": [
+                      {
+                        "unique_name": "definition_activity_01GIBGVIC2FTQ7apsX7eZ6Bs96Qr4Or4iIj",
+                        "name": "Condition Branch",
+                        "title": "Run if InstanceIdentifier Matches",
+                        "type": "logic.condition_block",
+                        "base_type": "activity",
+                        "properties": {
+                          "condition": {
+                            "left_operand": "$activity.definition_activity_01GIBCYBAKNIY34SLiUryZ2MjEuQEzoj4uD.input.source_array[@].DBInstanceIdentifier$",
+                            "operator": "eq",
+                            "right_operand": "$workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.input.variable_workflow_01GIC4E7CDVK56DmMBOcsGOE9yR9MLHZFHP$"
+                          },
+                          "continue_on_failure": false,
+                          "display_name": "Run if InstanceIdentifier Matches",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "actions": [
+                          {
+                            "unique_name": "definition_activity_01GIBPPRS92PY181dKrMSJp8ll8bZfmLCYg",
+                            "name": "Condition Block",
+                            "title": "Check if DB in Provisioned State",
+                            "type": "logic.if_else",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "Check if DB in Provisioned State",
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity",
+                            "blocks": [
+                              {
+                                "unique_name": "definition_activity_01GIBPQ757MLJ2cHCm3BO4BQoQ0p09sDaym",
+                                "name": "Condition Branch",
+                                "title": "Run on Available DBState",
+                                "type": "logic.condition_block",
+                                "base_type": "activity",
+                                "properties": {
+                                  "condition": {
+                                    "left_operand": "$activity.definition_activity_01GIBCYBAKNIY34SLiUryZ2MjEuQEzoj4uD.input.source_array[@].DBInstanceStatus$",
+                                    "operator": "eq",
+                                    "right_operand": "available"
+                                  },
+                                  "continue_on_failure": false,
+                                  "display_name": "Run on Available DBState",
+                                  "skip_execution": false
+                                },
+                                "object_type": "definition_activity",
+                                "actions": [
+                                  {
+                                    "unique_name": "definition_activity_01GIBKJLUV7793iMCtEYtTTGTzcGgzdiFFV",
+                                    "name": "Set Variables",
+                                    "title": "Set Endpoint Var",
+                                    "type": "core.set_multiple_variables",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "continue_on_failure": false,
+                                      "display_name": "Set Endpoint Var",
+                                      "skip_execution": false,
+                                      "variables_to_update": [
+                                        {
+                                          "variable_to_update": "$workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.local.variable_workflow_01GIBKHNOH9Z50clYsefM512pnRJjP2ng7j$",
+                                          "variable_value_new": "$activity.definition_activity_01GIBCYBAKNIY34SLiUryZ2MjEuQEzoj4uD.input.source_array[@].Endpoint$"
+                                        }
+                                      ]
+                                    },
+                                    "object_type": "definition_activity"
+                                  },
+                                  {
+                                    "unique_name": "definition_activity_01GIBM8PR2ENK51YObyr0YUbfKcTT2QPwQH",
+                                    "name": "JSONPath Query",
+                                    "title": "Parse Address from Endpoint",
+                                    "type": "corejava.jsonpathquery",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "action_timeout": 180,
+                                      "continue_on_failure": false,
+                                      "display_name": "Parse Address from Endpoint",
+                                      "input_json": "$workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.local.variable_workflow_01GIBKHNOH9Z50clYsefM512pnRJjP2ng7j$",
+                                      "jsonpath_queries": [
+                                        {
+                                          "jsonpath_query": "$.Address",
+                                          "jsonpath_query_name": "Address",
+                                          "jsonpath_query_type": "string"
+                                        }
+                                      ],
+                                      "skip_execution": false
+                                    },
+                                    "object_type": "definition_activity"
+                                  },
+                                  {
+                                    "unique_name": "definition_activity_01GIBND66FEIS5iCqXpZp8YHvXEOG9Lk7mW",
+                                    "name": "Set Variables",
+                                    "title": "Set Address Var",
+                                    "type": "core.set_multiple_variables",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "continue_on_failure": false,
+                                      "display_name": "Set Address Var",
+                                      "skip_execution": false,
+                                      "variables_to_update": [
+                                        {
+                                          "variable_to_update": "$workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.local.variable_workflow_01GIBLUNT8JMM2GbmF0txlptF9aSlNttUsN$",
+                                          "variable_value_new": "$activity.definition_activity_01GIBM8PR2ENK51YObyr0YUbfKcTT2QPwQH.output.jsonpath_queries.Address$"
+                                        }
+                                      ]
+                                    },
+                                    "object_type": "definition_activity"
+                                  },
+                                  {
+                                    "unique_name": "definition_activity_01GIBZ42GHKXO6bbbnnkReLLo3qjNdGTcf8",
+                                    "name": "Set Variables",
+                                    "title": "Set Provisioned State True",
+                                    "type": "core.set_multiple_variables",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "continue_on_failure": false,
+                                      "display_name": "Set Provisioned State True",
+                                      "skip_execution": false,
+                                      "variables_to_update": [
+                                        {
+                                          "variable_to_update": "$workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.local.variable_workflow_01GIBRNM1OQ833OVisbhDFWrkkpW5fi50Za$",
+                                          "variable_value_new": true
+                                        }
+                                      ]
+                                    },
+                                    "object_type": "definition_activity"
+                                  }
+                                ]
+                              },
+                              {
+                                "unique_name": "definition_activity_01GIF5WYZYBH57myOfjKmIBUtKJS39zUQOc",
+                                "name": "Condition Branch",
+                                "title": "Condition Branch",
+                                "type": "logic.condition_block",
+                                "base_type": "activity",
+                                "properties": {
+                                  "condition": {
+                                    "left_operand": "$activity.definition_activity_01GIBCYBAKNIY34SLiUryZ2MjEuQEzoj4uD.input.source_array[@].DBInstanceStatus$",
+                                    "operator": "ne",
+                                    "right_operand": "available"
+                                  },
+                                  "continue_on_failure": false,
+                                  "display_name": "Condition Branch",
+                                  "skip_execution": false
+                                },
+                                "object_type": "definition_activity",
+                                "actions": [
+                                  {
+                                    "unique_name": "definition_activity_01GIF69ZAPKXB0n1kozjVn3xJPVgg4L82tt",
+                                    "name": "Continue",
+                                    "title": "Continue",
+                                    "type": "logic.continue",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "continue_on_failure": false,
+                                      "display_name": "Continue",
+                                      "skip_execution": false
+                                    },
+                                    "object_type": "definition_activity"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01GIB5JDLI9EF1zsTj9JxVmBaJYjmNcekeK",
+        "name": "Execute Linux/Unix SSH Command",
+        "title": "Create DB",
+        "type": "terminal.ssh_command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "command": "mysql -h $workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.local.variable_workflow_01GIBLUNT8JMM2GbmF0txlptF9aSlNttUsN$ -u $workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.input.variable_workflow_01GIC3NLU487E6XE50pfMQBKMtggFr5e8vr$ -p'$workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.input.variable_workflow_01GICFIEUFWR55CJXY7aoTwH2Wy6IWOAjpX$' -e \"create database $workflow.definition_workflow_01GIB2MWBJO517D7Pfwi5eR1z82G5Uch8o9.input.variable_workflow_01GIC4E7CDVK56DmMBOcsGOE9yR9MLHZFHP$;\"",
+          "command_timeout": 60,
+          "continue_on_failure": false,
+          "display_name": "Create DB",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BH1LFDP5YSK2v6CSRvtIUvzHYyP6q4IqS"
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01BH1LFDP5YSK2v6CSRvtIUvzHYyP6q4IqS": {
+      "unique_name": "definition_target_01BH1LFDP5YSK2v6CSRvtIUvzHYyP6q4IqS",
+      "name": "cloudbox",
+      "title": "cloudbox",
+      "type": "terminal.unix_linux_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "bash_shell": "/bin/bash",
+        "default_runtime_user_id": "definition_runtime_user_01BH16597O8PB72JNzAVlj801ZRl00sa06Y",
+        "display_name": "cloudbox",
+        "host": "35.215.60.144",
+        "port": 222
+      }
+    },
+    "definition_target_01DO4NWYEOPAY033BIaCGRTTpE8oH2y07VJ": {
+      "unique_name": "definition_target_01DO4NWYEOPAY033BIaCGRTTpE8oH2y07VJ",
+      "name": "AWS Target",
+      "title": "AWS Target",
+      "type": "aws.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01DO4JRWX8B6A1vXxoSS0OiAbt72I0Yz91t",
+        "display_name": "AWS Target",
+        "region": "us-east-1"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01BH16597O8PB72JNzAVlj801ZRl00sa06Y": {
+      "unique_name": "definition_runtime_user_01BH16597O8PB72JNzAVlj801ZRl00sa06Y",
+      "name": "cloudbox",
+      "title": "cloudbox",
+      "type": "runtime_user.terminal_key_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "cloudbox",
+        "key": "*****",
+        "user": "*****"
+      }
+    },
+    "definition_runtime_user_01DO4JRWX8B6A1vXxoSS0OiAbt72I0Yz91t": {
+      "unique_name": "definition_runtime_user_01DO4JRWX8B6A1vXxoSS0OiAbt72I0Yz91t",
+      "name": "AWS Credentials",
+      "title": "AWS Credentials",
+      "type": "runtime_user.aws_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "access_key": "*****",
+        "description": "Using Matt Ferguson's AWS credentials",
+        "display_name": "AWS Credentials",
+        "secret_key": "*****"
+      }
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01F42M70W21TL4ZuneBOLdoHD9ahywUqLvE",
+    "definition_workflow_01F3M9UNSF1NP3xGKKUZ62wG7E6SIVnOFJg"
+  ]
+}
