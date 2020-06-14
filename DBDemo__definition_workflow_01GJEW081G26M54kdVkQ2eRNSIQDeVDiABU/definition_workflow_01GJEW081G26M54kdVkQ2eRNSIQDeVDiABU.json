@@ -1,0 +1,241 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01GJEW081G26M54kdVkQ2eRNSIQDeVDiABU",
+    "name": "DB Demo",
+    "title": "DB Demo",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "tcount",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01GJJ02HXSMKL3Q5VZmxVqrk7mSYCqlFzZ1",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "current",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01GJK1J7OPID33IWC5SS9SxdYLD7r8No9DR",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "DB Demo",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "corejava.jdbc_endpoint",
+        "target_id": "definition_target_01GJF13K1HSWX3cdtEh6IyFCz8M8OJmscGc",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01GJF1C7H951H2kNyhsFsHBRCaRvfvOC4wK",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "Select * from state;",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01GJFK9R7G4324mm9MxU08sAwMILHrXHdoQ",
+        "name": "Insert into Table via JDBC",
+        "title": "Insert into Table via JDBC",
+        "type": "corejava.insert_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Insert into Table via JDBC",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "INSERT INTO state(state,command,revcommand) VALUES('installed','helm install wordpress','helm remove wordpress')",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01GJINKRT350V7aCHlIjcuNaQB0wj5xeJSC",
+        "name": "Select from Table via JDBC",
+        "title": "Select from Table via JDBC",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select from Table via JDBC",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "Select * from state;",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01GJK5QE4TZE054DFWxsjX3FQFejw3QfhYM",
+        "name": "Execute Python Script",
+        "title": "minus 1 from Max Rows",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "minus 1 from Max Rows",
+          "script": "count = $activity.definition_activity_01GJINKRT350V7aCHlIjcuNaQB0wj5xeJSC.output.row_count$ - 1",
+          "script_queries": [
+            {
+              "script_query": "count",
+              "script_query_name": "count",
+              "script_query_type": "integer"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01GJK4O6Z6J3F4HvKtxJlBhTTgjuOX0f5xj",
+        "name": "JSONPath Query",
+        "title": "Get ID from last row",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get ID from last row",
+          "input_json": "$activity.definition_activity_01GJINKRT350V7aCHlIjcuNaQB0wj5xeJSC.output.response_body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$[$activity.definition_activity_01GJK5QE4TZE054DFWxsjX3FQFejw3QfhYM.output.script_queries.count$].id",
+              "jsonpath_query_name": "id",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01GJFW1RAM66W2aCQy16vSAaihzNbX6I8Zy",
+        "name": "Delete from Table via JDBC",
+        "title": "Delete from Table via JDBC",
+        "type": "corejava.delete_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Delete from Table via JDBC",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "delete from state where id=$activity.definition_activity_01GJK4O6Z6J3F4HvKtxJlBhTTgjuOX0f5xj.output.jsonpath_queries.id$",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01GJF13K1HSWX3cdtEh6IyFCz8M8OJmscGc": {
+      "unique_name": "definition_target_01GJF13K1HSWX3cdtEh6IyFCz8M8OJmscGc",
+      "name": "aodb",
+      "title": "aodb",
+      "type": "corejava.jdbc_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "database": "aodb",
+        "dbtype": "mysql",
+        "default_runtime_user_id": "definition_runtime_user_01GJEXPECMR843vtTUdLgsSD269LssGfITq",
+        "display_name": "aodb",
+        "port": 3306,
+        "server": "aodb.c1mkn1w9z1ur.us-east-2.rds.amazonaws.com"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01GJEXPECMR843vtTUdLgsSD269LssGfITq": {
+      "unique_name": "definition_runtime_user_01GJEXPECMR843vtTUdLgsSD269LssGfITq",
+      "name": "aodb",
+      "title": "aodb",
+      "type": "runtime_user.database_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "aodb",
+        "password": "*****",
+        "username": "*****"
+      }
+    }
+  }
+}
