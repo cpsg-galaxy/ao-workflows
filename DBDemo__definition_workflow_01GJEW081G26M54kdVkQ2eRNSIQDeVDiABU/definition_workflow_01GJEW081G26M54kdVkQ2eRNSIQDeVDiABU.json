@@ -7,18 +7,6 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "current",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01GJK1J7OPID33IWC5SS9SxdYLD7r8No9DR",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.integer",
         "properties": {
           "value": 0,
@@ -28,6 +16,18 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01GJJ02HXSMKL3Q5VZmxVqrk7mSYCqlFzZ1",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "current",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01GJK1J7OPID33IWC5SS9SxdYLD7r8No9DR",
         "object_type": "variable_workflow"
       }
     ],
@@ -44,8 +44,7 @@
       },
       "target": {
         "target_type": "corejava.jdbc_endpoint",
-        "target_id": "definition_target_01GJF13K1HSWX3cdtEh6IyFCz8M8OJmscGc",
-        "execute_on_workflow_target": true
+        "specify_on_workflow_start": true
       }
     },
     "object_type": "definition_workflow",
@@ -285,38 +284,5 @@
     "categories": [
       "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
     ]
-  },
-  "targets": {
-    "definition_target_01GJF13K1HSWX3cdtEh6IyFCz8M8OJmscGc": {
-      "unique_name": "definition_target_01GJF13K1HSWX3cdtEh6IyFCz8M8OJmscGc",
-      "name": "aodb",
-      "title": "aodb",
-      "type": "corejava.jdbc_endpoint",
-      "base_type": "target",
-      "object_type": "definition_target",
-      "properties": {
-        "database": "aodb",
-        "dbtype": "mysql",
-        "default_runtime_user_id": "definition_runtime_user_01GJEXPECMR843vtTUdLgsSD269LssGfITq",
-        "display_name": "aodb",
-        "port": 3306,
-        "server": "aodb.c1mkn1w9z1ur.us-east-2.rds.amazonaws.com"
-      }
-    }
-  },
-  "runtime_users": {
-    "definition_runtime_user_01GJEXPECMR843vtTUdLgsSD269LssGfITq": {
-      "unique_name": "definition_runtime_user_01GJEXPECMR843vtTUdLgsSD269LssGfITq",
-      "name": "aodb",
-      "title": "aodb",
-      "type": "runtime_user.database_credentials",
-      "base_type": "runtime_user",
-      "object_type": "definition_runtime_user",
-      "properties": {
-        "display_name": "aodb",
-        "password": "*****",
-        "username": "*****"
-      }
-    }
   }
 }
