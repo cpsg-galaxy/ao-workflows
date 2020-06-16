@@ -7,18 +7,6 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "local",
-          "name": "tcount",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01GJJ02HXSMKL3Q5VZmxVqrk7mSYCqlFzZ1",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
@@ -28,6 +16,18 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01GJK1J7OPID33IWC5SS9SxdYLD7r8No9DR",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "tcount",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01GJJ02HXSMKL3Q5VZmxVqrk7mSYCqlFzZ1",
         "object_type": "variable_workflow"
       }
     ],
@@ -53,13 +53,13 @@
       {
         "unique_name": "definition_activity_01GJF1C7H951H2kNyhsFsHBRCaRvfvOC4wK",
         "name": "Select from Table via JDBC",
-        "title": "Select from Table via JDBC",
+        "title": "Initial Select of DB",
         "type": "corejava.select_from_via_jdbc",
         "base_type": "activity",
         "properties": {
           "action_timeout": 180,
           "continue_on_failure": false,
-          "display_name": "Select from Table via JDBC",
+          "display_name": "Initial Select of DB",
           "persist_output": false,
           "populate_columns": true,
           "row_count": 200,
@@ -106,13 +106,13 @@
       {
         "unique_name": "definition_activity_01GJINKRT350V7aCHlIjcuNaQB0wj5xeJSC",
         "name": "Select from Table via JDBC",
-        "title": "Select from Table via JDBC",
+        "title": "Select Statement after Insert",
         "type": "corejava.select_from_via_jdbc",
         "base_type": "activity",
         "properties": {
           "action_timeout": 180,
           "continue_on_failure": false,
-          "display_name": "Select from Table via JDBC",
+          "display_name": "Select Statement after Insert",
           "persist_output": false,
           "populate_columns": true,
           "row_count": 200,
@@ -176,6 +176,59 @@
         "object_type": "definition_activity"
       },
       {
+        "unique_name": "definition_activity_01GLTM7W2HHNN2V46Jh5fkbKzj7VItTrsrt",
+        "name": "Update Table via JDBC",
+        "title": "Update Table via JDBC",
+        "type": "corejava.update_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Update Table via JDBC",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "Update state Set command='helm install Kibana', revcommand='helm remove Kibana' where id = $activity.definition_activity_01GJK4O6Z6J3F4HvKtxJlBhTTgjuOX0f5xj.output.jsonpath_queries.id$",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01GLTRTKS1NCO1bc18i6IsfTOCWGHhSe5sT",
+        "name": "Select from Table via JDBC",
+        "title": "Select statement after Update",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select statement after Update",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "Select * from state;",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
         "unique_name": "definition_activity_01GJFW1RAM66W2aCQy16vSAaihzNbX6I8Zy",
         "name": "Delete from Table via JDBC",
         "title": "Delete from Table via JDBC",
@@ -191,6 +244,34 @@
           },
           "skip_execution": false,
           "sql_query": "delete from state where id=$activity.definition_activity_01GJK4O6Z6J3F4HvKtxJlBhTTgjuOX0f5xj.output.jsonpath_queries.id$",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01GLTTWW780AJ028YLvPpSVGn7hxbFB2ytm",
+        "name": "Select from Table via JDBC",
+        "title": "Select Statement after Delete",
+        "type": "corejava.select_from_via_jdbc",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Select Statement after Delete",
+          "persist_output": false,
+          "populate_columns": true,
+          "row_count": 200,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "sql_query": "Select * from state;",
           "target": {
             "override_workflow_target": false,
             "override_workflow_target_group_criteria": false,
