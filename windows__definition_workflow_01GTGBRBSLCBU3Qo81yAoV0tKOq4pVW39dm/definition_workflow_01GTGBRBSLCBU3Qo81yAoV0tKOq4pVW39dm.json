@@ -1,0 +1,82 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01GTGBRBSLCBU3Qo81yAoV0tKOq4pVW39dm",
+    "name": "tres",
+    "title": "tres",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "tres",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01GTGBWRFZ7M40tO8NlAtPUhg0M0st6WUs9",
+        "name": "Restart Server",
+        "title": "Restart Server",
+        "type": "windows.restart",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Restart Server",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01GTGC6C69J605aq3IRXNmA03GsSTiVzEAG",
+        "name": "Control Windows Service",
+        "title": "Control Windows Service",
+        "type": "windows.control_windows_service",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Control Windows Service",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
